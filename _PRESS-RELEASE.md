@@ -1,4 +1,4 @@
-# Project Name #
+# ASCII Well that Ends Well #
 
 <!--
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -17,16 +17,16 @@ Once the project moves into development, the press release can be used as a touc
  -->
 
 ## Heading ##
-  > ASCII Well that Ends Well
-
-## Sub-Heading ##
   > An ASCII art service
 
+## Sub-Heading ##
+  > A simple gallery for text art and memes
+
 ## Summary ##
-  > ASCII art is a fun aesthetic that fits well in messaging apps and text chats! ASCII Well that Ends Well allows you to easily save ASCII pictures you like to bring up later, when you want to drop just the right reaction into a conversation.
+  > Text art is a fun aesthetic that fits great in messaging apps, social media, emails, anywhere there's text! ASCII Well that Ends Well allows you to easily save ASCII pictures you'd like to bring up later, when you want to drop just the right reaction into a conversation.
 
 ## Problem ##
-  > Images are easily stored in folders or on a phone to be added to a message, but saving and sharing ASCII requires digging around in text files! There must be a better way.
+  > Photos are easily added to a message from a folder or phone, but saving and sharing ASCII means digging around in text files. There must be a better way!
 
 ## Solution ##
   > With ASCII Well that Ends Well, when you find a great ASCII image, you can paste it into the text box and it will be saved for later, in an easy-to-browse gallery.
