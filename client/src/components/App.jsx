@@ -5,7 +5,7 @@ import Gallery from './Gallery.jsx';
 
 export default function App() {
   const [gallery, setGallery] = useState([]);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     document.documentElement.className = darkMode ? 'dark' : '';
@@ -13,7 +13,7 @@ export default function App() {
 
   function updateGallery() {
     getAllArt().then((newGallery) => {
-      newGallery.forEach((entry) => (entry.ascii = entry.ascii.split('\n')));
+      newGallery.forEach((entry) => (entry.asciiLines = entry.ascii.split('\n')));
       setGallery(newGallery);
     });
   }

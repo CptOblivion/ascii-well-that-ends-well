@@ -7,15 +7,19 @@ function GalleryEntry({ entry, size }) {
 
   useEffect(() => {
     if (ref.current) {
-      setFontSize(Math.min(size / entry.ascii.length * .75, 20));
+      setFontSize(Math.min(size / entry.asciiLines.length * .75, 20));
     }
   }, [size]);
 
+  function clickHandler() {
+    navigator.clipboard.writeText(entry.ascii)
+  }
+
   return (
     <div className='row'>
-      <button className='art col' ref={ref}>
-        <div style={{ fontSize: fontSize }}>
-          {entry.ascii.map((line, i) => (
+      <button className='art col' ref={ref} onClick={clickHandler}>
+        <div style={{ fontSize: fontSize, margin: 0, border: 0, padding: 0 }}>
+          {entry.asciiLines.map((line, i) => (
             <div key={i}>{line}</div>
           ))}
         </div>
