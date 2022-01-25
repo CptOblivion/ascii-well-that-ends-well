@@ -26,8 +26,8 @@ const config = {
                 loader: 'babel-loader'
             },
             {
-                test: /\.s[ac]ss$/i,
-                use: ['css-loader', 'sass-loader'],
+                test: /\.s(a|c)ss$/i,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
@@ -43,10 +43,7 @@ const config = {
 module.exports = () => {
     if (isProduction) {
         config.mode = 'production';
-
         config.plugins.push(new MiniCssExtractPlugin());
-
-
     } else {
         config.mode = 'development';
     }
