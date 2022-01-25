@@ -39,6 +39,8 @@
     "babel-loader": "^8.2.3",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^6.5.1",
+    "eslint": "^8.7.0",
+    "eslint-plugin-react": "^7.28.0",
     "mini-css-extract-plugin": "^2.4.5",
     "sass": "^1.47.0",
     "sass-loader": "^12.4.0",
