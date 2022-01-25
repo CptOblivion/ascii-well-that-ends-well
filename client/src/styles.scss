@@ -14,10 +14,24 @@ body {
   flex-direction: column;
 }
 
+.art {
+  font-family: 'Courier New', monospace;
+  white-space: pre;
+}
+
+.artInput {
+  min-height: 8em;
+  overflow-x: auto;
+}
+
 .gallery {
+  font-size: 4px;
   .art {
-    font-family: 'Courier New', monospace;
-    white-space: pre;
-    overflow: scroll;
+    transition-duration: .2s;
+    &:hover {
+      // TODO: scale more smoothly, and neighbors as well
+      animation-duration: .5s;
+      font-size: 2.5em;
+    }
   }
 }

@@ -3,6 +3,7 @@ const { Art } = require('./schema.js')
 
 async function submitArt(data) {
   const art = new Art({
+    title: data.tile,
     user: data.user,
     email: data.email,
     ascii: data.ascii

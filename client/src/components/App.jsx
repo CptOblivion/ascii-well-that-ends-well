@@ -17,12 +17,8 @@ export default function App() {
     updateGallery();
   }, []);
 
-  useEffect(() => {
-    console.log(gallery)
-  }, [gallery]);
-
   function submitArt(user, email, ascii) {
-    postArt({ user, email, ascii }).then(() => updateGallery());
+    return postArt({ user, email, ascii }).then(() => updateGallery());
   }
 
   return (
