@@ -6,9 +6,9 @@ function Gallery({ entries }) {
   const [localMouse, setLocalMouse] = useState(false)
 
   return (
-    <div className='gallery'>
+    <div className='gallery col'>
       {entries.map((entry) => (
-        <GalleryEntry key={entry._id} entry={entry} />
+        <GalleryEntry key={entry._id} entry={entry} size={60} />
       ))}
     </div>
   );

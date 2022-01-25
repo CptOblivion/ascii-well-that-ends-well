@@ -1,8 +1,14 @@
+* {
+  margin: inherit;
+}
+
 body {
+  margin: .2rem;
 }
 
 .badInput {
-  background-color: red;
+  background-color: #f89393;
+  border-color: #912424
 }
 
 .container {
@@ -24,24 +30,51 @@ body {
   overflow-x: auto;
 }
 
-.gallery {
-  overflow: scroll;
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
   display: flex;
   flex-direction: column;
+}
+
+.gallery {
+  overflow-y: auto;
+  overflow-x: hidden;
   align-items: center;
   .art {
     margin: .1rem;
-    border: 2px solid grey;
-    border-radius: .5rem;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items:center;
     height: 4rem;
     overflow: hidden;
-    width: 4rem;
+    width: fit-content;
+    min-width: 4rem;
+    max-width: 8rem;
     div {
       width: fit-content;
+      font-weight: bold;
     }
   }
+}
+
+button {
+  border: 2px solid lightGrey;
+  border-radius: .5rem;
+  transition-duration: .15s;
+  background-color: white;
+  color: black;
+  &:hover {
+    box-shadow: 0 .1rem .3rem #0003,
+                inset 0 -.2rem .6rem -.3rem #0003;
+  }
+  &:active {
+    transition-duration: .015s;
+    box-shadow: 0 0 0 #0000,
+              inset 0 .4rem 1rem #0005 ;
+
+  }
+
 }
