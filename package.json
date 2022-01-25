@@ -4,6 +4,8 @@
   "description": "My webpack project",
   "main": "index.js",
   "scripts": {
+    "start": "node server",
+    "start:dev": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development -w",
@@ -23,6 +25,7 @@
   "homepage": "https://github.com/CptOblivion/hr-bge0-mvp#readme",
   "dependencies": {
     "mongoose": "^6.1.8",
+    "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "style-loader": "^3.3.1"
