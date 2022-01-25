@@ -13,7 +13,14 @@ export default function App() {
 
   function updateGallery() {
     getAllArt().then((newGallery) => {
-      newGallery.forEach((entry) => (entry.asciiLines = entry.ascii.split('\n')));
+      for (const entry of newGallery) {
+        entry.asciiWidth = 0;
+        entry.asciiLines = entry.ascii.split('\n')
+        for (const line of entry.asciiLines) {
+          entry.asciiWidth = Math.max(entry.asciiWidth, line.length)
+        }
+      }
+      console.log(newGallery)
       setGallery(newGallery);
     });
   }

@@ -6,13 +6,13 @@ function GalleryEntry({ entry, size, clickHandler }) {
 
   return (
     <div className='row'>
-      <button onClick={() => clickHandler(entry)}>
-        <ASCIIDisplay entry={entry} size={size} maxFont={20} />
-      </button>
       <div className='col'>
         <div>{entry.title ? entry.title : 'untitled'}</div>
         <div>{entry.user}</div>
       </div>
+      <button onClick={() => clickHandler(entry)}>
+        <ASCIIDisplay entry={entry} size={size} maxFont={20} />
+      </button>
     </div>
   );
 }

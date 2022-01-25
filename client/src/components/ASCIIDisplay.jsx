@@ -7,7 +7,10 @@ function GalleryEntry({ entry, size, maxFont = Infinity }) {
 
   useEffect(() => {
     if (ref.current && entry.asciiLines) {
-      setFontSize(Math.min((size / entry.asciiLines.length) * 0.75, maxFont));
+      setFontSize(Math.min(
+        (size / entry.asciiLines.length) * 0.75,
+        (size / entry.asciiWidth) * 1.2,
+        maxFont));
     }
   }, [size]);
 

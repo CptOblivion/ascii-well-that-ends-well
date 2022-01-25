@@ -34,8 +34,12 @@ body {
   margin: $margin-reset;
 }
 
-.container {
+#app {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   max-width: 40rem;
+
 }
 
 .submitForm {
@@ -66,14 +70,13 @@ body {
 .gallery {
   overflow-y: auto;
   overflow-x: hidden;
-  align-items: center;
+  align-items: flex-end;
   .art {
     margin: .1rem;
     justify-content: center;
     align-items:center;
     height: 4rem;
-    overflow: hidden;
-    width: fit-content;
+    width: 4rem;
     min-width: 4rem;
     max-width: 8rem;
     div {
@@ -81,6 +84,13 @@ body {
       font-weight: bold;
     }
   }
+}
+
+.artZoomed {
+  justify-content: center;
+  align-items: center;
+  height: 75vmin;
+  width: 75vmin;
 }
 
 button {
@@ -138,12 +148,12 @@ button {
   animation-name: modal-back;
   position: fixed;
   margin: 0;
-  // width: 100vw;
-  // height: 100vh;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: #8883
 }
 
@@ -174,6 +184,9 @@ button {
   padding: 4rem;
   min-width: 50%;
   min-height: 50%;
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 2rem 20rem #0003;
 }
 
 .modalFrame {

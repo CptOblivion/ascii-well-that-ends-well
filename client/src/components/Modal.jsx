@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 function Modal({ show, closeHandler, children }) {
-  if (!show) return null;
+  const [el, setEl] = useState(null)
+
+  useEffect(() => {
+    const newEl = document.createElement('div')
+    document.body.append(newEl)
+    setEl(newEl)
+  }, [])
+
+  if (!show || !el) return null;
   return (
-    <div className='modalBack' onClick={() => closeHandler(false)}>
-      <div className='modalMain'>
-        {children}
-        <button className='closeButton' onClick={() => closeHandler(false)}>X</button>
-      </div>
-    </div>
+    ReactDOM.createPortal(
+      <div className='modalBack' onClick={() => closeHandler(false)}>
+        <div className='modalMain'>
+          <div className='modalFrame'>
+            {children}
+          </div>
+          <button className='closeButton' onClick={() => closeHandler(false)}>X</button>
+        </div>
+      </div>,
+      el
+    )
   )
 }
 
