@@ -1,0 +1,116 @@
+$background-light: white;
+$background-dark: #292727;
+$color-light: black;
+$color-dark: #888888;
+$border-light: lightgrey;
+$border-dark: lightgrey;
+
+html {
+  background-color: $background-light;
+  color: $color-light;
+}
+
+html.dark {
+  background-color: $background-dark;
+  color: $color-dark;
+}
+
+* {
+  margin: inherit;
+}
+
+body {
+  margin: .2rem;
+}
+
+.container {
+  max-width: 40rem;
+}
+
+.submitForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.art {
+  font-family: 'Courier New', monospace;
+  white-space: pre;
+}
+
+.artInput {
+  min-height: 8em;
+  overflow-x: auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery {
+  overflow-y: auto;
+  overflow-x: hidden;
+  align-items: center;
+  .art {
+    margin: .1rem;
+    justify-content: center;
+    align-items:center;
+    height: 4rem;
+    overflow: hidden;
+    width: fit-content;
+    min-width: 4rem;
+    max-width: 8rem;
+    div {
+      width: fit-content;
+      font-weight: bold;
+    }
+  }
+}
+
+button {
+  color: $color-light;
+  background-color: $background-light;
+  border: 2px solid $border-light;
+  border-radius: .5rem;
+  transition-duration: .15s;
+  &:hover {
+    box-shadow: 0 .1rem .3rem #0003,
+                inset 0 -.2rem .6rem -.3rem #0003;
+  }
+  &:active {
+    transition-duration: .015s;
+    box-shadow: 0 0 0 #0000,
+              inset 0 .4rem 1rem #0005 ;
+  }
+}
+
+.dark button {
+  border-color: $border-dark;
+  background-color: $background-dark;
+  color: $color-dark;
+  &:hover {
+    background: radial-gradient(at 50% 40%, #fff3 0%, #fff0 100%)
+  }
+
+  &:active {
+    background: radial-gradient(at 50% 60%, #fff2 0%, #fff0 100%)
+  }
+}
+
+.badInput {
+  color: #912424;
+  background-color: #f89393;
+  border-color: #912424;
+}
+
+.dark .badInput {
+  color: #330000;
+  background-color: #912424;
+  border-color: #330000;
+}
+

@@ -1,0 +1,49 @@
+{
+  "name": "my-webpack-project",
+  "version": "1.0.0",
+  "description": "My webpack project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "start:dev": "nodemon server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development -w",
+    "build:prod": "webpack --mode=production --node-env=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CptOblivion/hr-bge0-mvp.git"
+  },
+  "author": "Liam Richardson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CptOblivion/hr-bge0-mvp/issues"
+  },
+  "homepage": "https://github.com/CptOblivion/hr-bge0-mvp#readme",
+  "dependencies": {
+    "mongoose": "^6.1.8",
+    "nodemon": "^2.0.15",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "style-loader": "^3.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@webpack-cli/generators": "^2.4.2",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.2.3",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^6.5.1",
+    "eslint": "^8.7.0",
+    "eslint-plugin-react": "^7.28.0",
+    "mini-css-extract-plugin": "^2.4.5",
+    "sass": "^1.47.0",
+    "sass-loader": "^12.4.0",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.6.0"
+  }
+}
