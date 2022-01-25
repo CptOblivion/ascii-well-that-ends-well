@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types'
 
-function SubmitForm({ submitAscii }) {
+function SubmitForm({ submitArt }) {
   const [user, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [ascii, setAscii] = useState('');
@@ -10,7 +10,7 @@ function SubmitForm({ submitAscii }) {
   function submitHandler(e) {
     e.preventDefault();
     if (user === '' || email === '' || ascii === '') return setInvalid(true);
-    submitAscii(user, email, ascii);
+    submitArt(user, email, ascii);
   }
 
   return (
@@ -23,6 +23,6 @@ function SubmitForm({ submitAscii }) {
   );
 }
 
-SubmitForm.propTypes = { submitAscii: PropTypes.string };
+SubmitForm.propTypes = { submitArt: PropTypes.func };
 
 export default SubmitForm;

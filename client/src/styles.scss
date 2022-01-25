@@ -1,3 +1,6 @@
+body {
+}
+
 .badInput {
   background-color: red;
 }
@@ -9,4 +12,12 @@
 .submitForm {
   display: flex;
   flex-direction: column;
+}
+
+.gallery {
+  .art {
+    font-family: 'Courier New', monospace;
+    white-space: pre;
+    overflow: scroll;
+  }
 }

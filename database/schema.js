@@ -13,4 +13,4 @@ const artSchema = new mongoose.Schema(
 
 const Art = mongoose.model('Art', artSchema);
 
-exports = { Art };
+module.exports = { Art };

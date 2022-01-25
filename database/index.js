@@ -11,14 +11,15 @@ async function submitArt(data) {
 }
 
 async function getAllArt() {
-  await Art.find({});
+  const art = await Art.find({});
+  return art;
 }
 
 async function init() {
   await mongoose.connect('mongodb://localhost:27017/asciiwell');
 }
 
-exports = {
+module.exports = {
   init,
   getAllArt,
   submitArt,
