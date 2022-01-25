@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import GalleryEntry from './GalleryEntry.jsx';
 
 function Gallery({ entries }) {
+  const [localMouse, setLocalMouse] = useState(false)
+
   return (
     <div className='gallery'>
       {entries.map((entry) => (
