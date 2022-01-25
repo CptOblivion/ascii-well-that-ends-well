@@ -7,9 +7,9 @@ const isProduction = process.env.NODE_ENV == 'production';
 
 
 const config = {
-    entry: './src/index.js',
+    entry: './client/src/index.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'client/dist'),
     },
     devServer: {
         open: true,
@@ -23,11 +23,11 @@ const config = {
         rules: [
             {
                 test: /\.(js|jsx)$/i,
-                loader: 'babel-loader',
+                loader: 'babel-loader'
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: [stylesHandler, 'css-loader', 'sass-loader'],
+                use: ['css-loader', 'sass-loader'],
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
@@ -43,10 +43,10 @@ const config = {
 module.exports = () => {
     if (isProduction) {
         config.mode = 'production';
-        
+
         config.plugins.push(new MiniCssExtractPlugin());
-        
-        
+
+
     } else {
         config.mode = 'development';
     }
