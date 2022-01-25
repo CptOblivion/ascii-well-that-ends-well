@@ -1,28 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import ASCIIDisplay from './ASCIIDisplay.jsx';
 
-function GalleryEntry({ entry, size }) {
-  const [fontSize, setFontSize] = useState(10);
-  const ref = useRef();
-
-  useEffect(() => {
-    if (ref.current) {
-      setFontSize(Math.min(size / entry.asciiLines.length * .75, 20));
-    }
-  }, [size]);
-
-  function clickHandler() {
-    navigator.clipboard.writeText(entry.ascii)
-  }
+function GalleryEntry({ entry, size, clickHandler }) {
 
   return (
     <div className='row'>
-      <button className='art col' ref={ref} onClick={clickHandler}>
-        <div style={{ fontSize: fontSize, margin: 0, border: 0, padding: 0 }}>
-          {entry.asciiLines.map((line, i) => (
-            <div key={i}>{line}</div>
-          ))}
-        </div>
+      <button onClick={() => clickHandler(entry)}>
+        <ASCIIDisplay entry={entry} size={size} maxFont={20} />
       </button>
       <div className='col'>
         <div>{entry.title ? entry.title : 'untitled'}</div>
@@ -31,6 +16,10 @@ function GalleryEntry({ entry, size }) {
     </div>
   );
 }
-GalleryEntry.propTypes = { entry: PropTypes.object, size: PropTypes.number };
+GalleryEntry.propTypes = {
+  entry: PropTypes.object,
+  size: PropTypes.number,
+  clickHandler: PropTypes.func,
+};
 
 export default GalleryEntry;

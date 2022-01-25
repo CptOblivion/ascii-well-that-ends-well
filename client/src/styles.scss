@@ -5,6 +5,17 @@ $color-dark: white;
 $border-light: lightgrey;
 $border-dark: lightgrey;
 
+$margin-reset: .2rem;
+
+@mixin border-standard {
+  border: 2px solid $border-light;
+  border-radius: .5rem;
+}
+
+@mixin border-standard-dark {
+  border-color: $border-dark;
+}
+
 html {
   background-color: $background-light;
   color: $color-light;
@@ -20,7 +31,7 @@ html.dark {
 }
 
 body {
-  margin: .2rem;
+  margin: $margin-reset;
 }
 
 .container {
@@ -28,6 +39,16 @@ body {
 }
 
 .submitForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
   display: flex;
   flex-direction: column;
 }
@@ -40,16 +61,6 @@ body {
 .artInput {
   min-height: 8em;
   overflow-x: auto;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-}
-
-.col {
-  display: flex;
-  flex-direction: column;
 }
 
 .gallery {
@@ -75,8 +86,7 @@ body {
 button {
   color: $color-light;
   background-color: $background-light;
-  border: 2px solid $border-light;
-  border-radius: .5rem;
+  @include border-standard;
   transition-duration: .15s;
   &:hover {
     box-shadow: 0 .1rem .3rem #0003,
@@ -90,7 +100,7 @@ button {
 }
 
 .dark button {
-  border-color: $border-dark;
+  @include border-standard-dark;
   background-color: $background-dark;
   color: $color-dark;
   &:hover {
@@ -112,5 +122,74 @@ button {
   color: #330000;
   background-color: #912424;
   border-color: #330000;
+}
+
+@keyframes modal-back {
+  0% {
+    background-color: #8880
+  }
+  100% {
+    background-color: #8883
+  }
+}
+
+.modalBack {
+  animation-duration: .25s;
+  animation-name: modal-back;
+  position: fixed;
+  margin: 0;
+  // width: 100vw;
+  // height: 100vh;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #8883
+}
+
+@keyframes scale-in {
+  0% {
+    width: 0;
+    height: 0;
+    min-width: 0;
+    min-height: 0;
+    box-shadow: 0 0 0 #0000;
+  }
+  100% {
+    min-width: 50%;
+    min-height: 50%;
+    box-shadow: 0 2rem 20rem #0003;
+  }
+}
+
+.modalMain {
+  animation-duration: .25s;
+  animation-name: scale-in;
+  @include border-standard;
+  background-color: $background-light;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 4rem;
+  min-width: 50%;
+  min-height: 50%;
+}
+
+.modalFrame {
+  overflow: hidden;
+}
+
+.dark .modalMain {
+  @include border-standard-dark;
+  background-color: $background-dark;
+}
+
+.closeButton {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 2rem;
+  height: 2rem;
 }
 

@@ -5,7 +5,7 @@ import Gallery from './Gallery.jsx';
 
 export default function App() {
   const [gallery, setGallery] = useState([]);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     document.documentElement.className = darkMode ? 'dark' : '';
