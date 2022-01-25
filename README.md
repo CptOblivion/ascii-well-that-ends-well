@@ -1,3 +1,3 @@
 # ASCII Well that Ends Well #
 
-[Press release] (./_PRESS-RELEASE.md)
+[Press release](./_PRESS-RELEASE.md)
