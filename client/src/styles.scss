@@ -36,8 +36,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items:center;
     height: 4rem;
     overflow: hidden;
     width: 4rem;
+    div {
+      width: fit-content;
+    }
   }
 }
