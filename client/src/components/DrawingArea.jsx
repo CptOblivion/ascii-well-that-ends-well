@@ -4,7 +4,7 @@ import ASCIIDisplay from './ASCIIDisplay.jsx';
 
 
 const [gridWidth, gridHeight] = [80, 40];
-const [blockWidth, blockHeight] = [2, 4];
+const [blockWidth, blockHeight] = [2, 3];
 const width = gridWidth * blockWidth;
 const height = gridHeight * blockHeight;
 const line = Array(gridWidth).fill('.').join('');
@@ -41,19 +41,17 @@ function DrawingArea({ updateArt }) {
     let newAscii = '';
     for (let i = 0; i < gridHeight; i++) {
       for (let j = 0; j < gridWidth; j++) {
-        const blockOffset = i * gridHeight * blockHeight * 4
-        // const block = []
-        for (let bi = 0; bi < height; bi += width * 4)  {
-          for(let bj = blockOffset + bi; bj < blockOffset + bi + blockWidth; bj += 4) {
-            if (pixelArray[bj] > 128) {
-              console.log(bi, bj)
+        const blockOffset = i * blockHeight * width + j * blockWidth;
+        let escape = false;
+        for (let bi = 0; !escape && bi < blockHeight * width; bi += width)  {
+          for (let bj = 0; !escape && bj < blockWidth; bj++) {
+            if (pixelArray[(blockOffset + bi +bj) * 4 + 3] > 0) {
               newAscii += '@'
-              break
+              escape = true;
             }
           }
-          // block.push(pixelArray.slice(, blockOffset + bi + blockSize[0]))
         }
-        newAscii += '.'
+        if (!escape) newAscii += '_'
         //end of the line
         if (j === gridWidth - 1) newAscii += '\n'
       }
@@ -71,6 +69,7 @@ function DrawingArea({ updateArt }) {
         onMouseDown={() => setMouseDown(true)}
         onMouseUp={() => setMouseDown(false)}
         onMouseMove={getLine}
+        onMouseOut={() => setMouseDown(false)}
         style={{ width: '100%', height: 'auto' }}
       />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, pointerEvents: 'none' }}>
