@@ -12,7 +12,7 @@ async function submitArt(data) {
 }
 
 async function getAllArt() {
-  const art = await Art.find({});
+  const art = await Art.find({}, undefined, {sort: '-createdAt'});
   return art;
 }
 
