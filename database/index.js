@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Art } = require('./schema.js')
 
 async function submitArt(data) {
+  console.log(data)
   const art = new Art({
     title: data.tile,
     user: data.user,

@@ -23,7 +23,7 @@ function SubmitForm({ submitArt }) {
   function submitHandler(e) {
     e.preventDefault();
     if (user === '' || email === '' || ascii === '') return setInvalid(true);
-    submitArt(user, email, ascii).then(() => {
+    submitArt(user, email, ascii, title).then(() => {
       setTitle('');
       setUser('');
       setEmail('');

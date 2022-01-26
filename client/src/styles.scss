@@ -36,6 +36,8 @@ body {
 }
 
 #container {
+  display: flex;
+  flex-direction: row;
   position: absolute;
   left: 0;
   right: 0;

@@ -39,18 +39,20 @@ export default function App() {
     updateGallery();
   }, []);
 
-  function submitArt(user, email, ascii) {
-    return postArt({ user, email, ascii }).then(() => updateGallery());
+  function submitArt(user, email, ascii, title) {
+    return postArt({ user, email, ascii, title }).then(() => updateGallery());
   }
 
   return (
     <div>
-      <RatioContext.Provider id='container' className='row' value={ratio}>
-        <div style={{flex:1}} >
-          <SubmitForm submitArt={submitArt} />
-        </div>
-        <Gallery entries={gallery} deleteArt={onDeleteArt} />
-      </RatioContext.Provider>
+      <div id='container' className='row' >
+        <RatioContext.Provider value={ratio}>
+          <div style={{flex:1}} >
+            <SubmitForm submitArt={submitArt} />
+          </div>
+          <Gallery entries={gallery} deleteArt={onDeleteArt} />
+        </RatioContext.Provider>
+      </div>
       <button id='darkMode' onClick={() => setDarkMode(!darkMode)} />
     </div>
   );
