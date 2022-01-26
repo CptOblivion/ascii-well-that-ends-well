@@ -16,16 +16,24 @@ $margin-reset: 0.2rem;
   border-color: $border-dark;
 }
 
-html {
-  font-family: Arial, Helvetica, sans-serif;
+@mixin background {
   background-color: $background-light;
   color: $color-light;
+}
+
+@mixin background-dark {
+  background-color: $background-dark;
+  color: $color-dark;
+}
+
+html {
+  @include background;
+  font-family: Arial, Helvetica, sans-serif;
   user-select: none;
 }
 
 html.dark {
-  background-color: $background-dark;
-  color: $color-dark;
+  @include background-dark;
 }
 
 * {
@@ -97,12 +105,12 @@ body {
   bottom: 0;
   width: 4rem;
   height: 4rem;
-  background-color: $background-dark;
+  @include background-dark;
   border-radius: 0.5rem 3.5rem 0.5rem 0.5rem;
 }
 
 .dark #darkMode {
-  background-color: $background-light;
+  @include background;
 }
 
 .artZoomed {
@@ -113,8 +121,7 @@ body {
 }
 
 button {
-  color: $color-light;
-  background-color: $background-light;
+  @include background;
   @include border-standard;
   transition-duration: 0.15s;
   &:hover:not(:disabled) {
@@ -129,8 +136,7 @@ button {
 
 .dark button {
   @include border-standard-dark;
-  background-color: $background-dark;
-  color: $color-dark;
+  @include background-dark;
   &:hover:not(:disabled) {
     background: radial-gradient(at 50% 40%, #fff5 0%, #fff0 100%);
   }
@@ -148,8 +154,7 @@ input {
 .dark textarea,
 .dark input {
   @include border-standard-dark;
-  background-color: $background-dark;
-  color: $color-dark;
+  @include background-dark;
 }
 
 .badInput {
@@ -204,10 +209,10 @@ input {
 }
 
 .modalMain {
+  @include border-standard;
+  @include background;
   animation-duration: 0.25s;
   animation-name: scale-in;
-  @include border-standard;
-  background-color: $background-light;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -226,7 +231,7 @@ input {
 
 .dark .modalMain {
   @include border-standard-dark;
-  background-color: $background-dark;
+  @include background-dark;
 }
 
 .closeButton {
@@ -248,4 +253,57 @@ input {
 H1 {
   font-family: 'Courier New', monospace;
   text-align: center;
+}
+
+@keyframes toast-in {
+  0% {
+    transform: translate(-50%, -100%);
+    box-shadow: 0 -3rem 3rem #0003;
+  }
+  100% {
+    transform: translate(-50%, 0);
+    box-shadow: 0 0.5rem 3rem #0003;
+  }
+}
+
+@keyframes toast-out {
+  0% {
+    transform: translate(-50%, 0);
+    box-shadow: 0 0.5rem 3rem #0003;
+  }
+  100% {
+    transform: translate(-50%, -100%);
+    box-shadow: 0 -3rem 3rem #0003;
+  }
+}
+
+.toast {
+  @include background;
+  @include border-standard;
+  animation-fill-mode: both;
+
+  pointer-events: none;
+  font-size: 1.2rem;
+
+  animation-duration: 0.4s;
+  animation-name: toast-in;
+  position: fixed;
+  top: 0;
+  left: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 20rem;
+  min-height: 10rem;
+
+  &.closing {
+    animation-name: toast-out;
+  }
+}
+
+.dark .toast {
+  @include background-dark;
+  @include border-standard-dark;
 }

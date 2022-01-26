@@ -17,7 +17,6 @@ function SubmitForm({ submitArt }) {
   useEffect(() => {
     if (inputRef.current) {
       setAsciiHeight(inputRef.current.clientHeight);
-      console.log(inputRef.current.clientHeight)
       //TODO: doesn't shrink with reducing content size
     }
   }, [ascii]);

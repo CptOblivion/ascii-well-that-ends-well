@@ -60,7 +60,6 @@ function DrawingArea({ updateArt, canvas, rendered }) {
       comp = 'source-over'
     } else if (tool === 'erase') {
       style = '#000000ff';
-      console.log(ctx.globalCompositeOperation)
       comp = "destination-out";
     }
     ctx.fillStyle = style;
