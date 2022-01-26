@@ -114,10 +114,11 @@ button {
   background-color: $background-light;
   @include border-standard;
   transition-duration: 0.15s;
-  &:hover {
+  &:hover:not(:disabled) {
     box-shadow: 0 0.1rem 0.3rem #0003, inset 0 -0.2rem 0.6rem -0.3rem #0003;
   }
-  &:active {
+  &:active:not(:disabled),
+  &:disabled {
     transition-duration: 0.015s;
     box-shadow: 0 0 0 #0000, inset 0 0.4rem 1rem #0005;
   }
