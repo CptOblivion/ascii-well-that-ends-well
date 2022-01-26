@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SubmitForm from './SubmitForm.jsx';
-import { getAllArt, postArt } from '../utilities/api.js';
+import { getAllArt, postArt, deleteArt } from '../utilities/api.js';
 import Gallery from './Gallery.jsx';
 
 export default function App() {
@@ -24,6 +24,14 @@ export default function App() {
     });
   }
 
+  function onDeleteArt(art_id) {
+    deleteArt(art_id)
+      .then(() => {
+        updateGallery();
+      })
+      .catch(err => console.error(err))
+  }
+
   useEffect(() => {
     updateGallery();
   }, []);
@@ -38,7 +46,7 @@ export default function App() {
         <div style={{flex:1}} >
           <SubmitForm submitArt={submitArt} />
         </div>
-        <Gallery entries={gallery}/>
+        <Gallery entries={gallery} deleteArt={onDeleteArt}/>
       </div>
       <button id='darkMode' onClick={() => setDarkMode(!darkMode)} />
     </div>

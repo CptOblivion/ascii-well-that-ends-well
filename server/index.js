@@ -1,5 +1,5 @@
 const express = require('express');
-const { init, getAllArt, submitArt } = require('../database');
+const { init, getAllArt, submitArt, deleteArt } = require('../database');
 const port = process.env.PORT || 3000;
 
 const app = express();
@@ -26,6 +26,18 @@ app.post('/art', async (req, res) => {
     res.status(500).send('Unable to store art');
   }
 });
+
+app.delete('/art', async (req, res) => {
+  console.log('attempting to delete', req.query.art_id)
+  if (!req.query.art_id) return res.status(400).send('Missing art_id!')
+  try {
+    await deleteArt(req.query.art_id)
+    res.status(200).send();
+  } catch (err) {
+    console.error(err)
+    res.status(500).send('Unable to remove art')
+  }
+})
 
 app.use(express.static('./client/dist'));
 

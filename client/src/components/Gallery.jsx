@@ -4,11 +4,12 @@ import GalleryEntry from './GalleryEntry.jsx';
 import ASCIIDisplay from './ASCIIDisplay.jsx';
 import Modal from './Modal.jsx';
 
-function Gallery({ entries }) {
+function Gallery({ entries, deleteArt }) {
   // const [localMouse, setLocalMouse] = useState(false);
   const [showArt, setShowArt] = useState(false);
   const [art, setArt] = useState({});
   const [artSize, setArtSize] = useState(0);
+  const [deletingArt, setDeletingArt] = useState(null);
   const ref = useRef();
 
   useEffect(() => {
@@ -23,14 +24,26 @@ function Gallery({ entries }) {
   }
   function copyArt(art) {
     navigator.clipboard.writeText(art.ascii);
-    alert('Copied ASCII to the clipboard!')
+    alert('Copied ASCII to the clipboard!');
+  }
+
+  function confirmDeleteArt() {
+    deleteArt(deletingArt)
+    setDeletingArt(false);
   }
 
   return (
     <div>
       <div className='gallery col'>
         {entries.map((entry) => (
-          <GalleryEntry key={entry._id} entry={entry} size={160} clickHandler={clickGallery} copyArt={copyArt} />
+          <GalleryEntry
+            key={entry._id}
+            entry={entry}
+            size={160}
+            clickHandler={clickGallery}
+            copyArt={copyArt}
+            deleteArt={setDeletingArt}
+          />
         ))}
       </div>
       <Modal show={showArt} closeHandler={setShowArt}>
@@ -38,10 +51,17 @@ function Gallery({ entries }) {
           <ASCIIDisplay entry={art} size={artSize} />
         </div>
       </Modal>
+      <Modal show={deletingArt} closeHandler={setDeletingArt}>
+        <div className='col artZoomed' ref={ref}>
+          Are you sure? <br/>
+          <button onClick={confirmDeleteArt}>Delete!</button>
+          <button onClick={() => setDeletingArt(null)}>Never mind!</button>
+        </div>
+      </Modal>
     </div>
   );
 }
 
-Gallery.propTypes = { entries: PropTypes.array };
+Gallery.propTypes = { entries: PropTypes.array, deleteArt: PropTypes.func };
 
 export default Gallery;
