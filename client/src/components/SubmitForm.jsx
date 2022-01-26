@@ -33,7 +33,14 @@ function SubmitForm({ submitArt }) {
   }
 
   return (
-    <form onSubmit={submitHandler} className='col submitForm' style={{ flex: 1 }}>
+    <form
+      onSubmit={submitHandler}
+      className='col submitForm'
+      style={{ flex: 1 }}
+      autoComplete='off'
+      id='search-form'
+      data-lpignore='true'
+    >
       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='title' />
       {drawing ? (
         <DrawingArea updateArt={setAscii} />
@@ -45,6 +52,8 @@ function SubmitForm({ submitArt }) {
           value={ascii}
           onChange={(e) => setAscii(e.target.value)}
           placeholder='ASCII'
+          autoComplete='off'
+          id='search-field'
         />
       )}
       <button type='button' onClick={() => setDrawing(!drawing)}>

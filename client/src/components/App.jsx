@@ -46,7 +46,7 @@ export default function App() {
   return (
     <div>
       <div id='container' className='row' >
-        <RatioContext.Provider value={ratio}>
+        <RatioContext.Provider value={ratio} >
           <div style={{flex:1}} >
             <h1>ASCII Well that Ends Well</h1>
             <SubmitForm submitArt={submitArt} />

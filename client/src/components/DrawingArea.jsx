@@ -30,7 +30,7 @@ const asciiMap = [
   '/', //BR corner
   '#', //full
 ];
-function DrawingArea({ updateArt }) {
+function DrawingArea({ updateArt, blockEvents }) {
   const [mouseDown, setMouseDown] = useState(false);
   const [ascii, setAscii] = useState(emptyAscii);
   const [charToPix] = useState(0.63);
@@ -103,8 +103,8 @@ function DrawingArea({ updateArt }) {
   }
 
   return (
-    <div>
-      <div style={{ position: 'relative', width: 'fit-content' }} className='cleanBorder'>
+    <div onMouseDown={() => {}} onSelectStart={() => {}} >
+      <div style={{ position: 'relative', width: 'fit-content'}} className='cleanBorder'>
         <div
           width={width}
           height={height}
