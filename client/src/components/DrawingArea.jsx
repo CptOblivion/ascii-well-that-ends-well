@@ -14,10 +14,6 @@ function DrawingArea({ updateArt }) {
   const [mouseDown, setMouseDown] = useState(false);
   const [ascii, setAscii] = useState(emptyAscii);
   const ref = useRef(null);
-  // useEffect(() => {
-  //   const canvas = ref.current;
-  //   const context=canvas.getContext('2d')
-  // }, [])
 
   function getLine(e) {
     if (mouseDown) {
@@ -32,6 +28,7 @@ function DrawingArea({ updateArt }) {
       ctx.moveTo((endX - e.movementX) * scaleX, (endY - e.movementY) * scaleY);
       ctx.lineTo(endX * scaleX, endY * scaleY);
       ctx.stroke();
+      imageGrid()
     }
   }
 
@@ -39,8 +36,20 @@ function DrawingArea({ updateArt }) {
     /**
      * break image pixels into blocks
      * take advantage of linear nature of pixel array, and linear nature of a string:
-     *
+     * walk through string (skip newlines), get segment multiplying i by image width, then use segment length, repeat segment height times
      */
+
+    let newAscii = '';
+    for (let i = 0; i < artGrid[1] + 1; i++) {
+      for (let j = 0; j < artGrid[0] + 1; j++) {
+        if (j === artGrid[0]) {
+          newAscii += '\n'
+        } else {
+          newAscii += '/'
+        }
+      }
+    }
+    setAscii(newAscii);
   }
 
   return (
