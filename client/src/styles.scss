@@ -36,13 +36,12 @@ body {
 }
 
 #container {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100vw - $margin-reset * 4);
-  height: calc(100vh - $margin-reset * 4);
-  border: 1px solid red;
-  overflow: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  // overflow: hidden;
 }
 
 .submitForm {

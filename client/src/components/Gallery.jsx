@@ -21,19 +21,20 @@ function Gallery({ entries }) {
     setArt(entry);
     setShowArt(true);
   }
-  function copyArt() {
+  function copyArt(art) {
     navigator.clipboard.writeText(art.ascii);
+    alert('Copied ASCII to the clipboard!')
   }
 
   return (
     <div>
       <div className='gallery col'>
         {entries.map((entry) => (
-          <GalleryEntry key={entry._id} entry={entry} size={160} clickHandler={clickGallery} />
+          <GalleryEntry key={entry._id} entry={entry} size={160} clickHandler={clickGallery} copyArt={copyArt} />
         ))}
       </div>
       <Modal show={showArt} closeHandler={setShowArt}>
-        <div className='col artZoomed' ref={ref} onClick={copyArt}>
+        <div className='col artZoomed' ref={ref} onClick={() => copyArt(art)}>
           <ASCIIDisplay entry={art} size={artSize} />
         </div>
       </Modal>
