@@ -16,7 +16,8 @@ function SubmitForm({ submitArt }) {
 
   useEffect(() => {
     if (inputRef.current) {
-      setAsciiHeight(inputRef.current.scrollHeight);
+      setAsciiHeight(inputRef.current.clientHeight);
+      console.log(inputRef.current.clientHeight)
       //TODO: doesn't shrink with reducing content size
     }
   }, [ascii]);
@@ -37,7 +38,7 @@ function SubmitForm({ submitArt }) {
     <form
       onSubmit={submitHandler}
       className='col submitForm'
-      style={{ flex: 1 }}
+      style={{ flex: 1, alignItems: 'flex-start' }}
       autoComplete='off'
       id='search-form'
       data-lpignore='true'
@@ -45,10 +46,10 @@ function SubmitForm({ submitArt }) {
       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='title' />
       <canvas ref={canvasRef} id='drawingArea' hidden={true} />
       {drawing ? (
-        <DrawingArea updateArt={setAscii} canvas={canvasRef.current} rendered={drawing}/>
+        <DrawingArea updateArt={setAscii} canvas={canvasRef.current} rendered={drawing} />
       ) : (
         <textarea
-          style={{ height: asciiHeight }}
+          style={{ height: asciiHeight, alignSelf:'stretch' }}
           ref={inputRef}
           className='art artInput'
           value={ascii}
@@ -58,15 +59,21 @@ function SubmitForm({ submitArt }) {
           id='search-field'
         />
       )}
-      <button type='button' onClick={() => setDrawing(!drawing)}>
+      <button type='button' onClick={() => setDrawing(!drawing)} style={{ alignSelf: 'flex-end', width:'fit-content' }}>
         {drawing ? 'paste art instead' : 'draw art instead'}
       </button>
-      <input value={user} onChange={(e) => setUser(e.target.value)} placeholder='username' />
+      <input
+        value={user}
+        onChange={(e) => setUser(e.target.value)}
+        placeholder='username'
+        style={{ minWidth: '20em' }}
+      />
       <input
         type='email'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder='email'
+        style={{ minWidth: '40em' }}
       />
       <button className={invalid ? 'badInput' : ''}>Save</button>
     </form>
