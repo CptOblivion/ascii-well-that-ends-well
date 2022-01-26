@@ -7,7 +7,7 @@ function GalleryEntry({ entry, size, clickHandler, copyArt, deleteArt }) {
 
   return (
     <div className='row'>
-      <div className='col'>
+      <div className='col' style={{ alignItems: 'flex-end' }}>
         <div>{entry.title ? entry.title : 'untitled'}</div>
         <div>{entry.user}</div>
         <button onClick={() => copyArt(entry)} style={{width: 'fit-content', height: 'fit-content'}}>

@@ -8,7 +8,7 @@ export const RatioContext = React.createContext()
 export default function App() {
   const [gallery, setGallery] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
-  const [ratio, setRatio] = useState(1.05) //1.63?
+  const [ratio] = useState(1.05) //1.63?
 
   useEffect(() => {
     document.documentElement.className = darkMode ? 'dark' : '';
@@ -46,7 +46,7 @@ export default function App() {
   return (
     <div>
       <div id='container' className='row' >
-        <RatioContext.Provider value={ratio}>
+        <RatioContext.Provider value={ratio} >
           <div style={{flex:1}} >
             <h1>ASCII Well that Ends Well</h1>
             <SubmitForm submitArt={submitArt} />
