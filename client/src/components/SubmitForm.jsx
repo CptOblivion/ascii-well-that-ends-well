@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import DrawingArea from './DrawingArea.jsx';
 
 function SubmitForm({ submitArt }) {
   const [title, setTitle] = useState('');
@@ -36,14 +37,15 @@ function SubmitForm({ submitArt }) {
       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='title' />
       <input value={user} onChange={(e) => setUser(e.target.value)} placeholder='username' />
       <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email' />
-      <textarea
+      <DrawingArea />
+      {/* <textarea
       style={{ height: asciiHeight }}
         ref={inputRef}
         className='art artInput'
         value={ascii}
         onChange={(e) => setAscii(e.target.value)}
         placeholder='ASCII'
-      />
+      /> */}
       <button className={invalid ? 'badInput' : ''}>Submit</button>
     </form>
   );
