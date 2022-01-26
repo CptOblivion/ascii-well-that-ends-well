@@ -14,21 +14,21 @@ const emptyAscii = Array(gridHeight).fill(line).join('\n');
 
 const asciiMap = [
   ' ',
-  "'",
-  "'",
-  '"',
-  '.',
-  '[',
-  '/',
-  '/',
-  '.',
-  '\\',
-  ']',
-  '\\',
-  '_',
-  '\\',
-  '/',
-  '#',
+  "'", //TL dot
+  "'", //TR dot
+  '"', //T line
+  '.', //BL dot
+  '[', //L line
+  '/', //diag A
+  '/', //TL corner
+  '.', //BR dot
+  '\\', //diag B
+  ']', //R line
+  '\\', //TR corner
+  '_', //B line
+  '\\', //BL corner
+  '/', //BR corner
+  '#', //full
 ];
 function DrawingArea({ updateArt }) {
   const [mouseDown, setMouseDown] = useState(false);
