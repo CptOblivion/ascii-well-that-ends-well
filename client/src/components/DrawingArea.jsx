@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import ASCIIDisplay from './ASCIIDisplay.jsx';
 import { RatioContext } from './App.jsx';
+import PencilIcon from '../assets/icon-pencil.svg'
+import EraserIcon from '../assets/icon-eraser.svg'
 
 const [gridWidth, gridHeight] = [80, 40];
 const [blockWidth, blockHeight] = [2, 2];
@@ -31,7 +33,8 @@ const asciiMap = [
 function DrawingArea({ updateArt }) {
   const [mouseDown, setMouseDown] = useState(false);
   const [ascii, setAscii] = useState(emptyAscii);
-  const [charToPix, setCharToPix] = useState(0.63);
+  const [charToPix] = useState(0.63);
+  const [tool, setTool] = useState('draw')
   const ref = useRef(null);
 
   const ratio = useContext(RatioContext);
@@ -44,7 +47,18 @@ function DrawingArea({ updateArt }) {
     const posX = (e.pageX - offs.left) * (width / offs.width);
     const posY = (e.pageY - offs.top) * (height / offs.height);
     const ctx = ref.current.getContext('2d');
-    ctx.fillStyle = `rgba(0,0,0,1)`;
+    let style, comp;
+    if (tool === 'draw') {
+      style = '#000000ff'
+      comp = 'source-over'
+    } else if (tool === 'erase') {
+      style = '#000000ff';
+      console.log(ctx.globalCompositeOperation)
+      comp = "destination-out";
+    }
+    ctx.fillStyle = style;
+    ctx.strokeStyle = style;
+    ctx.globalCompositeOperation = comp
     ctx.fillRect(posX, posY, 1, 1);
     imageGrid(ctx.getImageData(0, 0, width, height).data);
   }
@@ -89,31 +103,41 @@ function DrawingArea({ updateArt }) {
   }
 
   return (
-    <div style={{ position: 'relative', width: 'fit-content' }} className='cleanBorder'>
-      <div
-        width={width}
-        height={height}
-        onMouseDown={drawDot}
-        onMouseUp={() => setMouseDown(false)}
-        onMouseMove={drawLine}
-        onMouseOut={() => setMouseDown(false)}
-        style={{ width: canvasWidth, height: canvasHeight }}
-      />
-      <canvas ref={ref} id='drawingArea' hidden={true} />
-      <div
-        style={{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          width: canvasWidth,
-          height: canvasHeight,
-          pointerEvents: 'none',
-        }}
-      >
-        <ASCIIDisplay
-          entry={{ ascii: ascii, asciiLines: ascii.split('\n'), asciiWidth: gridWidth }}
-          size={canvasWidth / charToPix}
+    <div>
+      <div style={{ position: 'relative', width: 'fit-content' }} className='cleanBorder'>
+        <div
+          width={width}
+          height={height}
+          onMouseDown={drawDot}
+          onMouseUp={() => setMouseDown(false)}
+          onMouseMove={drawLine}
+          onMouseOut={() => setMouseDown(false)}
+          style={{ width: canvasWidth, height: canvasHeight }}
         />
+        <canvas ref={ref} id='drawingArea' hidden={true} />
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            width: canvasWidth,
+            height: canvasHeight,
+            pointerEvents: 'none',
+          }}
+        >
+          <ASCIIDisplay
+            entry={{ ascii: ascii, asciiLines: ascii.split('\n'), asciiWidth: gridWidth }}
+            size={canvasWidth / charToPix}
+          />
+        </div>
+      </div>
+      <div>
+        <button type="button" onClick={() => setTool('draw')} disabled={tool === 'draw'} >
+          <img src={PencilIcon} />
+        </button>
+        <button type="button"  onClick={() => setTool('erase')} disabled={tool === 'erase'} >
+          <img src={EraserIcon} />
+        </button>
       </div>
     </div>
   );
