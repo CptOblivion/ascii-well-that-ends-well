@@ -2,15 +2,16 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ASCIIDisplay from './ASCIIDisplay.jsx';
 
+
 const artGrid = [80, 40];
 const artPixels = [2, 4];
 const width = artGrid[0] * artPixels[0];
 const height = artGrid[1] * artPixels[1];
-const emptyLine = Array(artGrid[0]).fill('.').join('');
-const emptyAscii = Array(artGrid[1]).fill(emptyLine);
+const line = Array(artGrid[0]).fill('.').join('');
+const emptyAscii = Array(artGrid[1]).fill(line).join('\n')
+
 function DrawingArea({ updateArt }) {
   const [mouseDown, setMouseDown] = useState(false);
-
   const [ascii, setAscii] = useState(emptyAscii);
   const ref = useRef(null);
   // useEffect(() => {
@@ -34,7 +35,13 @@ function DrawingArea({ updateArt }) {
     }
   }
 
-  function imageGrid() {}
+  function imageGrid() {
+    /**
+     * break image pixels into blocks
+     * take advantage of linear nature of pixel array, and linear nature of a string:
+     *
+     */
+  }
 
   return (
     <div style={{ position: 'relative' }}>
@@ -49,7 +56,7 @@ function DrawingArea({ updateArt }) {
         style={{ width: '100%', height: 'auto' }}
       />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, pointerEvents: 'none' }}>
-        <ASCIIDisplay entry={{ asciiLines: ascii, asciiWidth: artGrid[0] }} size={800} />
+        <ASCIIDisplay entry={{ ascii: ascii, asciiLines: ascii.split('\n'), asciiWidth: artGrid[0] }} size={800} />
       </div>
     </div>
   );
