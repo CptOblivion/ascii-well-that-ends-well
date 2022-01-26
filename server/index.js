@@ -1,6 +1,7 @@
 const express = require('express');
 const { init, getAllArt, submitArt, deleteArt } = require('../database');
-const port = process.env.PORT || 3000;
+const port = 80;
+const securePort = 443
 
 const app = express();
 
@@ -44,4 +45,7 @@ init().then(() => {
   app.listen(port, () => {
     console.log(`Listening on port ${port}`);
   });
+  app.listen(securePort, () => {
+    console.log(`listening securely on port ${securePort}`)
+  })
 });
