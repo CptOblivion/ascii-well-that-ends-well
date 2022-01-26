@@ -9,7 +9,7 @@ function SubmitForm({ submitArt }) {
   const [ascii, setAscii] = useState('');
   const [invalid, setInvalid] = useState(false);
   const [asciiHeight, setAsciiHeight] = useState(0);
-  const [drawing, setDrawing] = useState(true);
+  const [drawing, setDrawing] = useState(false);
 
   const inputRef = useRef(null);
 
@@ -36,7 +36,7 @@ function SubmitForm({ submitArt }) {
     <form onSubmit={submitHandler} className='col submitForm' style={{ flex: 1 }}>
       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='title' />
       {drawing ? (
-        <DrawingArea updateArt={setAscii}/>
+        <DrawingArea updateArt={setAscii} />
       ) : (
         <textarea
           style={{ height: asciiHeight }}
@@ -47,6 +47,9 @@ function SubmitForm({ submitArt }) {
           placeholder='ASCII'
         />
       )}
+      <button type='button' onClick={() => setDrawing(!drawing)}>
+        {drawing ? 'paste art instead' : 'draw art instead'}
+      </button>
       <input value={user} onChange={(e) => setUser(e.target.value)} placeholder='username' />
       <input
         type='email'
@@ -54,7 +57,7 @@ function SubmitForm({ submitArt }) {
         onChange={(e) => setEmail(e.target.value)}
         placeholder='email'
       />
-      <button className={invalid ? 'badInput' : ''}>Submit</button>
+      <button className={invalid ? 'badInput' : ''}>Save</button>
     </form>
   );
 }
