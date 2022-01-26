@@ -17,16 +17,21 @@ export default function App() {
   }, [darkMode]);
 
   function updateGallery() {
-    getAllArt().then((newGallery) => {
-      for (const entry of newGallery) {
-        entry.asciiWidth = 0;
-        entry.asciiLines = entry.ascii.split('\n');
-        for (const line of entry.asciiLines) {
-          entry.asciiWidth = Math.max(entry.asciiWidth, line.length);
+    getAllArt()
+      .then((newGallery) => {
+        for (const entry of newGallery) {
+          entry.asciiWidth = 0;
+          entry.asciiLines = entry.ascii.split('\n');
+          for (const line of entry.asciiLines) {
+            entry.asciiWidth = Math.max(entry.asciiWidth, line.length);
+          }
         }
-      }
-      setGallery(newGallery);
-    });
+        setGallery(newGallery);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast('Unable to load gallery');
+      });
   }
 
   function onDeleteArt(art_id) {
@@ -46,13 +51,15 @@ export default function App() {
   }, []);
 
   function submitArt(user, email, ascii, title) {
-    return postArt({ user, email, ascii, title }).then(() => {
-      updateGallery();
-      toast('Saved art');
-    }).catch((err) => {
-      console.error(err)
-      toast('Unable to save art')
-    })
+    return postArt({ user, email, ascii, title })
+      .then(() => {
+        updateGallery();
+        toast('Saved art');
+      })
+      .catch((err) => {
+        console.error(err);
+        toast('Unable to save art');
+      });
   }
 
   return (
