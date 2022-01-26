@@ -48,6 +48,7 @@ export default function App() {
       <div id='container' className='row' >
         <RatioContext.Provider value={ratio}>
           <div style={{flex:1}} >
+            <h1>ASCII Well that Ends Well</h1>
             <SubmitForm submitArt={submitArt} />
           </div>
           <Gallery entries={gallery} deleteArt={onDeleteArt} />

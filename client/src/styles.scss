@@ -17,6 +17,7 @@ $margin-reset: 0.2rem;
 }
 
 html {
+  font-family: Arial, Helvetica, sans-serif;
   background-color: $background-light;
   color: $color-light;
 }
@@ -240,4 +241,9 @@ input {
 
 .dark .cleanBorder {
   @include border-standard-dark;
+}
+
+H1 {
+  font-family: 'Courier New', monospace;
+  text-align: center;
 }
