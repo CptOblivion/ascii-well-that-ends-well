@@ -128,12 +128,12 @@ button {
   @include border-standard-dark;
   background-color: $background-dark;
   color: $color-dark;
-  &:hover {
-    background: radial-gradient(at 50% 40%, #fff3 0%, #fff0 100%);
+  &:hover:not(:disabled) {
+    background: radial-gradient(at 50% 40%, #fff5 0%, #fff0 100%);
   }
-
-  &:active {
-    background: radial-gradient(at 50% 60%, #fff2 0%, #fff0 100%);
+  &:active:not(:disabled),
+  &:disabled {
+    background: radial-gradient(at 50% 60%, #fff4 0%, #0008 100%);
   }
 }
 
