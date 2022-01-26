@@ -15,7 +15,7 @@ function Modal({ show, closeHandler, children }) {
   return (
     ReactDOM.createPortal(
       <div className='modalBack' onClick={() => closeHandler(false)}>
-        <div className='modalMain'>
+        <div className='modalMain' onClick={(e) => e.stopPropagation()}>
           <div className='modalFrame'>
             {children}
           </div>

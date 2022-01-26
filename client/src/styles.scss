@@ -32,20 +32,19 @@ html.dark {
 
 body {
   margin: $margin-reset;
+  height: 100%;
 }
 
-#app {
+#container {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   max-width: 40rem;
-
 }
 
-.submitForm {
-  display: flex;
-  flex-direction: column;
-}
+// .submitForm {
+//   flex: 1;
+// }
 
 .row {
   display: flex;
@@ -68,6 +67,7 @@ body {
 }
 
 .gallery {
+  height: calc(100vh - $margin-reset * 2);
   overflow-y: auto;
   overflow-x: hidden;
   align-items: flex-end;
@@ -75,15 +75,25 @@ body {
     margin: .1rem;
     justify-content: center;
     align-items:center;
-    height: 4rem;
-    width: 4rem;
-    min-width: 4rem;
-    max-width: 8rem;
+    height: 8rem;
+    width: 8rem;
     div {
-      width: fit-content;
       font-weight: bold;
     }
   }
+}
+
+#darkMode {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 4rem;
+  height: 4rem;
+  background-color: $background-dark;
+}
+
+.dark #darkMode {
+  background-color: $background-light;
 }
 
 .artZoomed {
@@ -144,6 +154,7 @@ button {
 }
 
 .modalBack {
+  z-index: 100;
   animation-duration: .25s;
   animation-name: modal-back;
   position: fixed;
@@ -166,8 +177,8 @@ button {
     box-shadow: 0 0 0 #0000;
   }
   100% {
-    min-width: 50%;
-    min-height: 50%;
+    min-width: 8rem;
+    min-height: 8rem;
     box-shadow: 0 2rem 20rem #0003;
   }
 }
@@ -182,8 +193,8 @@ button {
   top: 50%;
   transform: translate(-50%, -50%);
   padding: 4rem;
-  min-width: 50%;
-  min-height: 50%;
+  min-width: 8rem;
+  min-height: 8rem;
   max-width: 90vw;
   max-height: 90vh;
   box-shadow: 0 2rem 20rem #0003;

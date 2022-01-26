@@ -20,7 +20,6 @@ export default function App() {
           entry.asciiWidth = Math.max(entry.asciiWidth, line.length)
         }
       }
-      console.log(newGallery)
       setGallery(newGallery);
     });
   }
@@ -34,9 +33,12 @@ export default function App() {
   }
 
   return (
-    <div className='container'>
-      <SubmitForm submitArt={submitArt} />
-      <Gallery entries={gallery} />
+    <div>
+      <div id='container'>
+        <SubmitForm submitArt={submitArt} />
+        <Gallery entries={gallery} />
+      </div>
+      <button id='darkMode' onClick={() => setDarkMode(!darkMode)} />
     </div>
   );
 }

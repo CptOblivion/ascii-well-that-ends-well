@@ -9,7 +9,7 @@ function GalleryEntry({ entry, size, maxFont = Infinity }) {
     if (ref.current && entry.asciiLines) {
       setFontSize(Math.min(
         (size / entry.asciiLines.length) * 0.75,
-        (size / entry.asciiWidth) * 1.2,
+        (size / entry.asciiWidth) * 1.5,
         maxFont));
     }
   }, [size]);

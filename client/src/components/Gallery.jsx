@@ -5,7 +5,7 @@ import ASCIIDisplay from './ASCIIDisplay.jsx';
 import Modal from './Modal.jsx';
 
 function Gallery({ entries }) {
-  const [localMouse, setLocalMouse] = useState(false);
+  // const [localMouse, setLocalMouse] = useState(false);
   const [showArt, setShowArt] = useState(false);
   const [art, setArt] = useState({});
   const [artSize, setArtSize] = useState(0);
@@ -21,8 +21,7 @@ function Gallery({ entries }) {
     setArt(entry);
     setShowArt(true);
   }
-
-  function copyArt(art) {
+  function copyArt() {
     navigator.clipboard.writeText(art.ascii);
   }
 
@@ -30,11 +29,11 @@ function Gallery({ entries }) {
     <div>
       <div className='gallery col'>
         {entries.map((entry) => (
-          <GalleryEntry key={entry._id} entry={entry} size={60} clickHandler={clickGallery} />
+          <GalleryEntry key={entry._id} entry={entry} size={160} clickHandler={clickGallery} />
         ))}
       </div>
       <Modal show={showArt} closeHandler={setShowArt}>
-        <div className='col artZoomed' ref={ref}>
+        <div className='col artZoomed' ref={ref} onClick={copyArt}>
           <ASCIIDisplay entry={art} size={artSize} />
         </div>
       </Modal>
