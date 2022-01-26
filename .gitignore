@@ -22,6 +22,7 @@ coverage
 build/
 client/dist/*
 !client/dist/index.html
+!client/dist/favicon.ico
 
 
 # Dependency directorys

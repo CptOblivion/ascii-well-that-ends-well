@@ -103,7 +103,7 @@ function DrawingArea({ updateArt, blockEvents }) {
   }
 
   return (
-    <div onMouseDown={() => {}} onSelectStart={() => {}} >
+    <div >
       <div style={{ position: 'relative', width: 'fit-content'}} className='cleanBorder'>
         <div
           width={width}
