@@ -1,0 +1,243 @@
+$background-light: white;
+$background-dark: #292727;
+$color-light: black;
+$color-dark: white;
+$border-light: lightgrey;
+$border-dark: lightgrey;
+
+$margin-reset: 0.2rem;
+
+@mixin border-standard {
+  border: 2px solid $border-light;
+  border-radius: 0.5rem;
+}
+
+@mixin border-standard-dark {
+  border-color: $border-dark;
+}
+
+html {
+  background-color: $background-light;
+  color: $color-light;
+}
+
+html.dark {
+  background-color: $background-dark;
+  color: $color-dark;
+}
+
+* {
+  margin: inherit;
+}
+
+body {
+  margin: $margin-reset;
+  height: 100%;
+}
+
+#container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  // overflow: hidden;
+}
+
+.submitForm {
+  position: relative;
+  left: 50%;
+  transform: translateX((-50%));
+  max-width: 50rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.art {
+  font-family: 'Courier New', monospace;
+  white-space: pre;
+}
+
+.artInput {
+  min-height: 8em;
+  overflow-x: auto;
+}
+
+.gallery {
+  height: calc(100vh - $margin-reset * 8);
+  overflow-y: auto;
+  overflow-x: hidden;
+  align-items: flex-end;
+  .art {
+    margin: 0.1rem;
+    justify-content: center;
+    align-items: center;
+    height: 8rem;
+    width: 8rem;
+    div {
+      font-weight: bold;
+    }
+  }
+}
+
+#darkMode {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 4rem;
+  height: 4rem;
+  background-color: $background-dark;
+  border-radius: 0.5rem 3.5rem 0.5rem 0.5rem;
+}
+
+.dark #darkMode {
+  background-color: $background-light;
+}
+
+.artZoomed {
+  justify-content: center;
+  align-items: center;
+  height: 75vmin;
+  width: 75vmin;
+}
+
+button {
+  color: $color-light;
+  background-color: $background-light;
+  @include border-standard;
+  transition-duration: 0.15s;
+  &:hover:not(:disabled) {
+    box-shadow: 0 0.1rem 0.3rem #0003, inset 0 -0.2rem 0.6rem -0.3rem #0003;
+  }
+  &:active:not(:disabled),
+  &:disabled {
+    transition-duration: 0.015s;
+    box-shadow: 0 0 0 #0000, inset 0 0.4rem 1rem #0005;
+  }
+}
+
+.dark button {
+  @include border-standard-dark;
+  background-color: $background-dark;
+  color: $color-dark;
+  &:hover:not(:disabled) {
+    background: radial-gradient(at 50% 40%, #fff5 0%, #fff0 100%);
+  }
+  &:active:not(:disabled),
+  &:disabled {
+    background: radial-gradient(at 50% 60%, #fff4 0%, #0008 100%);
+  }
+}
+
+textarea,
+input {
+  @include border-standard;
+}
+
+.dark textarea,
+.dark input {
+  @include border-standard-dark;
+  background-color: $background-dark;
+  color: $color-dark;
+}
+
+.badInput {
+  color: #912424;
+  background-color: #f89393;
+  border-color: #912424;
+}
+
+.dark .badInput {
+  color: #330000;
+  background-color: #912424;
+  border-color: #330000;
+}
+
+@keyframes modal-back {
+  0% {
+    background-color: #8880;
+  }
+  100% {
+    background-color: #8883;
+  }
+}
+
+.modalBack {
+  z-index: 100;
+  animation-duration: 0.25s;
+  animation-name: modal-back;
+  position: fixed;
+  margin: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #8883;
+}
+
+@keyframes scale-in {
+  0% {
+    width: 0;
+    height: 0;
+    min-width: 0;
+    min-height: 0;
+    box-shadow: 0 0 0 #0000;
+  }
+  100% {
+    min-width: 8rem;
+    min-height: 8rem;
+    box-shadow: 0 2rem 20rem #0003;
+  }
+}
+
+.modalMain {
+  animation-duration: 0.25s;
+  animation-name: scale-in;
+  @include border-standard;
+  background-color: $background-light;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 4rem;
+  min-width: 8rem;
+  min-height: 8rem;
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 2rem 20rem #0003;
+}
+
+.modalFrame {
+  overflow: hidden;
+}
+
+.dark .modalMain {
+  @include border-standard-dark;
+  background-color: $background-dark;
+}
+
+.closeButton {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.cleanBorder {
+  @include border-standard;
+}
+
+.dark .cleanBorder {
+  @include border-standard-dark;
+}
