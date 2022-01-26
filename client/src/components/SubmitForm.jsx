@@ -8,35 +8,39 @@ function SubmitForm({ submitArt }) {
   const [email, setEmail] = useState('');
   const [ascii, setAscii] = useState('');
   const [invalid, setInvalid] = useState(false);
-  const [asciiHeight, setAsciiHeight] = useState(0)
+  const [asciiHeight, setAsciiHeight] = useState(0);
 
-  const inputRef = useRef(null)
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (inputRef.current) {
-      setAsciiHeight(inputRef.current.scrollHeight)
+      setAsciiHeight(inputRef.current.scrollHeight);
       //TODO: doesn't shrink with reducing content size
     }
-  }, [ascii])
+  }, [ascii]);
 
   function submitHandler(e) {
     e.preventDefault();
     if (user === '' || email === '' || ascii === '') return setInvalid(true);
-    submitArt(user, email, ascii)
-      .then(() => {
-        setTitle('')
-        setUser('')
-        setEmail('')
-        setAscii('')
-        setInvalid(false)
-      })
+    submitArt(user, email, ascii).then(() => {
+      setTitle('');
+      setUser('');
+      setEmail('');
+      setAscii('');
+      setInvalid(false);
+    });
   }
 
   return (
-    <form onSubmit={submitHandler} className='col submitForm' style={{flex:1}}>
+    <form onSubmit={submitHandler} className='col submitForm' style={{ flex: 1 }}>
       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='title' />
       <input value={user} onChange={(e) => setUser(e.target.value)} placeholder='username' />
-      <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email' />
+      <input
+        type='email'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder='email'
+      />
       <DrawingArea />
       {/* <textarea
       style={{ height: asciiHeight }}
@@ -51,6 +55,6 @@ function SubmitForm({ submitArt }) {
   );
 }
 
-SubmitForm.propTypes = { submitArt: PropTypes.func };
+SubmitForm.propTypes = { submitArt: PropTypes.func};
 
 export default SubmitForm;

@@ -1,19 +1,24 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import ASCIIDisplay from './ASCIIDisplay.jsx';
-
+import {RatioContext} from './App.jsx'
 
 const [gridWidth, gridHeight] = [80, 40];
 const [blockWidth, blockHeight] = [2, 3];
 const width = gridWidth * blockWidth;
 const height = gridHeight * blockHeight;
-const line = Array(gridWidth).fill('.').join('');
-const emptyAscii = Array(gridHeight).fill(line).join('\n')
+const line = Array(gridWidth).fill(' ').join('');
+const emptyAscii = Array(gridHeight).fill(line).join('\n');
 
 function DrawingArea({ updateArt }) {
   const [mouseDown, setMouseDown] = useState(false);
   const [ascii, setAscii] = useState(emptyAscii);
+  const [charToPix, setCharToPix] = useState(.63)
   const ref = useRef(null);
+
+  const ratio = useContext(RatioContext)
+  const canvasWidth = 800 * ratio;
+  const canvasHeight = 800;
 
   function getLine(e) {
     if (mouseDown) {
@@ -28,32 +33,28 @@ function DrawingArea({ updateArt }) {
       ctx.moveTo((endX - e.movementX) * scaleX, (endY - e.movementY) * scaleY);
       ctx.lineTo(endX * scaleX, endY * scaleY);
       ctx.stroke();
-      imageGrid(ctx.getImageData(0, 0, width, height).data)
+      imageGrid(ctx.getImageData(0, 0, width, height).data);
     }
   }
 
   function imageGrid(pixelArray) {
-    /**
-     * break image pixels into blocks
-     * take advantage of linear nature of pixel array, and linear nature of a string:
-     * walk through string (skip newlines), get segment multiplying i by image width, then use segment length, repeat segment height times
-     */
+    //the pixel array is a single line of RGBA values, that we need to break up into blocks of characters
     let newAscii = '';
     for (let i = 0; i < gridHeight; i++) {
       for (let j = 0; j < gridWidth; j++) {
         const blockOffset = i * blockHeight * width + j * blockWidth;
         let escape = false;
-        for (let bi = 0; !escape && bi < blockHeight * width; bi += width)  {
+        for (let bi = 0; !escape && bi < blockHeight * width; bi += width) {
           for (let bj = 0; !escape && bj < blockWidth; bj++) {
-            if (pixelArray[(blockOffset + bi +bj) * 4 + 3] > 0) {
-              newAscii += '@'
+            if (pixelArray[(blockOffset + bi + bj) * 4 + 3] > 0) {
+              newAscii += '@';
               escape = true;
             }
           }
         }
-        if (!escape) newAscii += '_'
+        if (!escape) newAscii += ' ';
         //end of the line
-        if (j === gridWidth - 1) newAscii += '\n'
+        if (j === gridWidth - 1) newAscii += '\n';
       }
     }
     setAscii(newAscii);
@@ -61,19 +62,34 @@ function DrawingArea({ updateArt }) {
 
   return (
     <div style={{ position: 'relative' }}>
-      <canvas
-        ref={ref}
-        id='drawingArea'
+      <div
         width={width}
         height={height}
         onMouseDown={() => setMouseDown(true)}
         onMouseUp={() => setMouseDown(false)}
         onMouseMove={getLine}
         onMouseOut={() => setMouseDown(false)}
-        style={{ width: '100%', height: 'auto' }}
+        style={{ width: canvasWidth, height: canvasHeight}}
+        />
+      <canvas
+        ref={ref}
+        id='drawingArea'
+        hidden={true}
       />
-      <div style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, pointerEvents: 'none' }}>
-        <ASCIIDisplay entry={{ ascii: ascii, asciiLines: ascii.split('\n'), asciiWidth: gridWidth }} size={800} />
+      <div
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          width: canvasWidth,
+          height: canvasHeight,
+          pointerEvents: 'none',
+        }}
+      >
+        <ASCIIDisplay
+          entry={{ ascii: ascii, asciiLines: ascii.split('\n'), asciiWidth: gridWidth }}
+          size={canvasWidth / charToPix}
+        />
       </div>
     </div>
   );

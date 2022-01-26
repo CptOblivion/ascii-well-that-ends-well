@@ -18,7 +18,6 @@ async function getAllArt() {
 
 function deleteArt(art_id) {
   return Art.deleteOne({_id: art_id})
-    .then(response => console.log(response))
 }
 
 async function init() {
