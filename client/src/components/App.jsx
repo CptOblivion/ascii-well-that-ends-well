@@ -34,9 +34,11 @@ export default function App() {
 
   return (
     <div>
-      <div id='container'>
-        <SubmitForm submitArt={submitArt} />
-        <Gallery entries={gallery} />
+      <div id='container' className='row'>
+        <div style={{flex:1}} >
+          <SubmitForm submitArt={submitArt} />
+        </div>
+        <Gallery entries={gallery}/>
       </div>
       <button id='darkMode' onClick={() => setDarkMode(!darkMode)} />
     </div>

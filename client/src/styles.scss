@@ -5,11 +5,11 @@ $color-dark: white;
 $border-light: lightgrey;
 $border-dark: lightgrey;
 
-$margin-reset: .2rem;
+$margin-reset: 0.2rem;
 
 @mixin border-standard {
   border: 2px solid $border-light;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 
 @mixin border-standard-dark {
@@ -39,12 +39,18 @@ body {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 40rem;
+  width: calc(100vw - $margin-reset * 4);
+  height: calc(100vh - $margin-reset * 4);
+  border: 1px solid red;
+  overflow: hidden;
 }
 
-// .submitForm {
-//   flex: 1;
-// }
+.submitForm {
+  position: relative;
+  left: 50%;
+  transform: translateX((-50%));
+  max-width: 50rem;
+}
 
 .row {
   display: flex;
@@ -67,14 +73,14 @@ body {
 }
 
 .gallery {
-  height: calc(100vh - $margin-reset * 2);
+  height: calc(100vh - $margin-reset * 8);
   overflow-y: auto;
   overflow-x: hidden;
   align-items: flex-end;
   .art {
-    margin: .1rem;
+    margin: 0.1rem;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     height: 8rem;
     width: 8rem;
     div {
@@ -90,6 +96,7 @@ body {
   width: 4rem;
   height: 4rem;
   background-color: $background-dark;
+  border-radius: 0.5rem 3.5rem 0.5rem 0.5rem;
 }
 
 .dark #darkMode {
@@ -107,15 +114,13 @@ button {
   color: $color-light;
   background-color: $background-light;
   @include border-standard;
-  transition-duration: .15s;
+  transition-duration: 0.15s;
   &:hover {
-    box-shadow: 0 .1rem .3rem #0003,
-                inset 0 -.2rem .6rem -.3rem #0003;
+    box-shadow: 0 0.1rem 0.3rem #0003, inset 0 -0.2rem 0.6rem -0.3rem #0003;
   }
   &:active {
-    transition-duration: .015s;
-    box-shadow: 0 0 0 #0000,
-              inset 0 .4rem 1rem #0005 ;
+    transition-duration: 0.015s;
+    box-shadow: 0 0 0 #0000, inset 0 0.4rem 1rem #0005;
   }
 }
 
@@ -124,11 +129,11 @@ button {
   background-color: $background-dark;
   color: $color-dark;
   &:hover {
-    background: radial-gradient(at 50% 40%, #fff3 0%, #fff0 100%)
+    background: radial-gradient(at 50% 40%, #fff3 0%, #fff0 100%);
   }
 
   &:active {
-    background: radial-gradient(at 50% 60%, #fff2 0%, #fff0 100%)
+    background: radial-gradient(at 50% 60%, #fff2 0%, #fff0 100%);
   }
 }
 
@@ -146,16 +151,16 @@ button {
 
 @keyframes modal-back {
   0% {
-    background-color: #8880
+    background-color: #8880;
   }
   100% {
-    background-color: #8883
+    background-color: #8883;
   }
 }
 
 .modalBack {
   z-index: 100;
-  animation-duration: .25s;
+  animation-duration: 0.25s;
   animation-name: modal-back;
   position: fixed;
   margin: 0;
@@ -165,7 +170,7 @@ button {
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #8883
+  background-color: #8883;
 }
 
 @keyframes scale-in {
@@ -184,7 +189,7 @@ button {
 }
 
 .modalMain {
-  animation-duration: .25s;
+  animation-duration: 0.25s;
   animation-name: scale-in;
   @include border-standard;
   background-color: $background-light;
@@ -216,4 +221,3 @@ button {
   width: 2rem;
   height: 2rem;
 }
-
