@@ -8,7 +8,7 @@ export const RatioContext = React.createContext()
 export default function App() {
   const [gallery, setGallery] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
-  const [ratio, setRatio] = useState(1.05) //1.63?
+  const [ratio] = useState(1.05) //1.63?
 
   useEffect(() => {
     document.documentElement.className = darkMode ? 'dark' : '';

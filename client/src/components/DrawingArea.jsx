@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import ASCIIDisplay from './ASCIIDisplay.jsx';
 import { RatioContext } from './App.jsx';
