@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 import GalleryEntry from './GalleryEntry.jsx';
 import ASCIIDisplay from './ASCIIDisplay.jsx';
 import Modal from './Modal.jsx';
-import Toast from './Toast.jsx';
 
-function Gallery({ entries, deleteArt }) {
+function Gallery({ entries, deleteArt, toast }) {
   // const [localMouse, setLocalMouse] = useState(false);
   const [showArt, setShowArt] = useState(false);
   const [art, setArt] = useState({});
   const [artSize, setArtSize] = useState(0);
   const [deletingArt, setDeletingArt] = useState(null);
-  const [toast, setToast] = useState('');
 
   const ref = useRef();
 
@@ -26,8 +24,13 @@ function Gallery({ entries, deleteArt }) {
     setShowArt(true);
   }
   function copyArt(art) {
-    setToast('Copied art to clipboard!')
-    navigator.clipboard.writeText(art.ascii);
+    try {
+      navigator.clipboard.writeText(art.ascii).then(() => {
+        toast('Copied art to clipboard!')
+      })
+    } catch {
+      toast('Couldn\'t copy to clipboard')
+    }
   }
 
   function confirmDeleteArt() {
@@ -61,14 +64,15 @@ function Gallery({ entries, deleteArt }) {
           <button onClick={() => setDeletingArt(null)}>Never mind!</button>
         </div>
       </Modal>
-      <Toast message={toast} setMessage={setToast} />
     </div>
   );
 }
 
 Gallery.propTypes = {
   entries: PropTypes.array,
-  deleteArt: PropTypes.func
+  deleteArt: PropTypes.func,
+  toast: PropTypes.func,
+
 };
 
 export default Gallery;

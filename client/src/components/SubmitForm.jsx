@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DrawingArea from './DrawingArea.jsx';
 
-function SubmitForm({ submitArt }) {
+function SubmitForm({ submitArt, toast }) {
   const [title, setTitle] = useState('');
   const [user, setUser] = useState('');
   const [email, setEmail] = useState('');
@@ -23,7 +23,18 @@ function SubmitForm({ submitArt }) {
 
   function submitHandler(e) {
     e.preventDefault();
-    if (user === '' || email === '' || ascii === '') return setInvalid(true);
+    if (user === '') {
+      toast('Please enter a username!');
+      return setInvalid(true);
+    }
+    if (email === '') {
+      toast('Please enter a username!');
+      return setInvalid(true);
+    }
+    if (ascii === '') {
+      toast("Couldn't find any ASCII to save!");
+      return setInvalid(true);
+    }
     submitArt(user, email, ascii, title).then(() => {
       setTitle('');
       setUser('');
@@ -48,7 +59,7 @@ function SubmitForm({ submitArt }) {
         <DrawingArea updateArt={setAscii} canvas={canvasRef.current} rendered={drawing} />
       ) : (
         <textarea
-          style={{ height: asciiHeight, alignSelf:'stretch' }}
+          style={{ height: asciiHeight, alignSelf: 'stretch' }}
           ref={inputRef}
           className='art artInput'
           value={ascii}
@@ -58,7 +69,11 @@ function SubmitForm({ submitArt }) {
           id='search-field'
         />
       )}
-      <button type='button' onClick={() => setDrawing(!drawing)} style={{ alignSelf: 'flex-end', width:'fit-content' }}>
+      <button
+        type='button'
+        onClick={() => setDrawing(!drawing)}
+        style={{ alignSelf: 'flex-end', width: 'fit-content' }}
+      >
         {drawing ? 'paste art instead' : 'draw art instead'}
       </button>
       <input
@@ -79,6 +94,6 @@ function SubmitForm({ submitArt }) {
   );
 }
 
-SubmitForm.propTypes = { submitArt: PropTypes.func };
+SubmitForm.propTypes = { submitArt: PropTypes.func, toast: PropTypes.func };
 
 export default SubmitForm;
