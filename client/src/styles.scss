@@ -36,8 +36,6 @@ body {
 }
 
 #container {
-  display: flex;
-  flex-direction: row;
   position: absolute;
   left: 0;
   right: 0;
@@ -233,4 +231,12 @@ input {
   top: 1rem;
   width: 2rem;
   height: 2rem;
+}
+
+.cleanBorder {
+  @include border-standard;
+}
+
+.dark .cleanBorder {
+  @include border-standard-dark;
 }

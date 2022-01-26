@@ -10,6 +10,7 @@ const height = gridHeight * blockHeight;
 const line = Array(gridWidth).fill(' ').join('');
 const emptyAscii = Array(gridHeight).fill(line).join('\n');
 
+
 function DrawingArea({ updateArt }) {
   const [mouseDown, setMouseDown] = useState(false);
   const [ascii, setAscii] = useState(emptyAscii);
@@ -20,7 +21,17 @@ function DrawingArea({ updateArt }) {
   const canvasWidth = 800 * ratio;
   const canvasHeight = 800;
 
-  function getLine(e) {
+  function drawDot(e) {
+    setMouseDown(true)
+    const offs = e.target.getBoundingClientRect();
+    const posX = (e.pageX - offs.left) * (width / offs.width);
+    const posY = (e.pageY - offs.top) * (height / offs.height);
+    const ctx = ref.current.getContext('2d');
+    ctx.fillStyle = `rgba(0,0,0,1)`;
+    ctx.fillRect(posX, posY, 1, 1)
+    imageGrid(ctx.getImageData(0, 0, width, height).data)
+  }
+  function drawLine(e) {
     if (mouseDown) {
       const offs = e.target.getBoundingClientRect();
       const endX = e.pageX - offs.left;
@@ -46,7 +57,7 @@ function DrawingArea({ updateArt }) {
         let escape = false;
         for (let bi = 0; !escape && bi < blockHeight * width; bi += width) {
           for (let bj = 0; !escape && bj < blockWidth; bj++) {
-            if (pixelArray[(blockOffset + bi + bj) * 4 + 3] > 0) {
+            if (pixelArray[(blockOffset + bi + bj) * 4 + 3] > 128) {
               newAscii += '@';
               escape = true;
             }
@@ -62,13 +73,13 @@ function DrawingArea({ updateArt }) {
   }
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', width: 'fit-content' }} className='cleanBorder'>
       <div
         width={width}
         height={height}
-        onMouseDown={() => setMouseDown(true)}
+        onMouseDown={drawDot}
         onMouseUp={() => setMouseDown(false)}
-        onMouseMove={getLine}
+        onMouseMove={drawLine}
         onMouseOut={() => setMouseDown(false)}
         style={{ width: canvasWidth, height: canvasHeight}}
         />
