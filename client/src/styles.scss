@@ -136,6 +136,18 @@ button {
   }
 }
 
+textarea,
+input {
+  @include border-standard;
+}
+
+.dark textarea,
+.dark input {
+  @include border-standard-dark;
+  background-color: $background-dark;
+  color: $color-dark;
+}
+
 .badInput {
   color: #912424;
   background-color: #f89393;
