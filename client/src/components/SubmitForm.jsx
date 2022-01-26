@@ -23,7 +23,7 @@ function SubmitForm({ submitArt }) {
   function submitHandler(e) {
     e.preventDefault();
     if (user === '' || email === '' || ascii === '') return setInvalid(true);
-    submitArt(user, email, ascii).then(() => {
+    submitArt(user, email, ascii, title).then(() => {
       setTitle('');
       setUser('');
       setEmail('');
@@ -35,13 +35,6 @@ function SubmitForm({ submitArt }) {
   return (
     <form onSubmit={submitHandler} className='col submitForm' style={{ flex: 1 }}>
       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='title' />
-      <input value={user} onChange={(e) => setUser(e.target.value)} placeholder='username' />
-      <input
-        type='email'
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder='email'
-      />
       {drawing ? (
         <DrawingArea updateArt={setAscii}/>
       ) : (
@@ -54,6 +47,13 @@ function SubmitForm({ submitArt }) {
           placeholder='ASCII'
         />
       )}
+      <input value={user} onChange={(e) => setUser(e.target.value)} placeholder='username' />
+      <input
+        type='email'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder='email'
+      />
       <button className={invalid ? 'badInput' : ''}>Submit</button>
     </form>
   );

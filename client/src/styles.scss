@@ -114,10 +114,11 @@ button {
   background-color: $background-light;
   @include border-standard;
   transition-duration: 0.15s;
-  &:hover {
+  &:hover:not(:disabled) {
     box-shadow: 0 0.1rem 0.3rem #0003, inset 0 -0.2rem 0.6rem -0.3rem #0003;
   }
-  &:active {
+  &:active:not(:disabled),
+  &:disabled {
     transition-duration: 0.015s;
     box-shadow: 0 0 0 #0000, inset 0 0.4rem 1rem #0005;
   }
@@ -127,12 +128,12 @@ button {
   @include border-standard-dark;
   background-color: $background-dark;
   color: $color-dark;
-  &:hover {
-    background: radial-gradient(at 50% 40%, #fff3 0%, #fff0 100%);
+  &:hover:not(:disabled) {
+    background: radial-gradient(at 50% 40%, #fff5 0%, #fff0 100%);
   }
-
-  &:active {
-    background: radial-gradient(at 50% 60%, #fff2 0%, #fff0 100%);
+  &:active:not(:disabled),
+  &:disabled {
+    background: radial-gradient(at 50% 60%, #fff4 0%, #0008 100%);
   }
 }
 
@@ -231,4 +232,12 @@ input {
   top: 1rem;
   width: 2rem;
   height: 2rem;
+}
+
+.cleanBorder {
+  @include border-standard;
+}
+
+.dark .cleanBorder {
+  @include border-standard-dark;
 }

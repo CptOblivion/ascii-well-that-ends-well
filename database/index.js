@@ -3,7 +3,7 @@ const { Art } = require('./schema.js')
 
 async function submitArt(data) {
   const art = new Art({
-    title: data.tile,
+    title: data.title,
     user: data.user,
     email: data.email,
     ascii: data.ascii
@@ -12,7 +12,7 @@ async function submitArt(data) {
 }
 
 async function getAllArt() {
-  const art = await Art.find({});
+  const art = await Art.find({}, undefined, {sort: '-createdAt'});
   return art;
 }
 
