@@ -9,6 +9,7 @@ function SubmitForm({ submitArt }) {
   const [ascii, setAscii] = useState('');
   const [invalid, setInvalid] = useState(false);
   const [asciiHeight, setAsciiHeight] = useState(0);
+  const [drawing, setDrawing] = useState(true);
 
   const inputRef = useRef(null);
 
@@ -41,20 +42,23 @@ function SubmitForm({ submitArt }) {
         onChange={(e) => setEmail(e.target.value)}
         placeholder='email'
       />
-      <DrawingArea />
-      {/* <textarea
-      style={{ height: asciiHeight }}
-        ref={inputRef}
-        className='art artInput'
-        value={ascii}
-        onChange={(e) => setAscii(e.target.value)}
-        placeholder='ASCII'
-      /> */}
+      {drawing ? (
+        <DrawingArea updateArt={setAscii}/>
+      ) : (
+        <textarea
+          style={{ height: asciiHeight }}
+          ref={inputRef}
+          className='art artInput'
+          value={ascii}
+          onChange={(e) => setAscii(e.target.value)}
+          placeholder='ASCII'
+        />
+      )}
       <button className={invalid ? 'badInput' : ''}>Submit</button>
     </form>
   );
 }
 
-SubmitForm.propTypes = { submitArt: PropTypes.func};
+SubmitForm.propTypes = { submitArt: PropTypes.func };
 
 export default SubmitForm;

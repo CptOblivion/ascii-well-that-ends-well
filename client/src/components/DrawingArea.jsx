@@ -58,6 +58,7 @@ function DrawingArea({ updateArt }) {
       }
     }
     setAscii(newAscii);
+    updateArt(newAscii);
   }
 
   return (
