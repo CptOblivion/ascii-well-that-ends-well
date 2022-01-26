@@ -24,7 +24,6 @@ function Gallery({ entries, deleteArt }) {
   }
   function copyArt(art) {
     navigator.clipboard.writeText(art.ascii);
-    alert('Copied ASCII to the clipboard!');
   }
 
   function confirmDeleteArt() {

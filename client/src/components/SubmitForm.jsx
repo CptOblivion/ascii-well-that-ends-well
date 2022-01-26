@@ -35,7 +35,7 @@ function SubmitForm({ submitArt }) {
     <form onSubmit={submitHandler} className='col submitForm' style={{flex:1}}>
       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='title' />
       <input value={user} onChange={(e) => setUser(e.target.value)} placeholder='username' />
-      <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email' />
+      <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email' />
       <textarea
       style={{ height: asciiHeight }}
         ref={inputRef}
