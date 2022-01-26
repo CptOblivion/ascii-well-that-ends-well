@@ -24,11 +24,10 @@ function Gallery({ entries, deleteArt }) {
   }
   function copyArt(art) {
     navigator.clipboard.writeText(art.ascii);
-    alert('Copied ASCII to the clipboard!');
   }
 
   function confirmDeleteArt() {
-    deleteArt(deletingArt)
+    deleteArt(deletingArt);
     setDeletingArt(false);
   }
 
@@ -48,12 +47,12 @@ function Gallery({ entries, deleteArt }) {
       </div>
       <Modal show={showArt} closeHandler={setShowArt}>
         <div className='col artZoomed' ref={ref} onClick={() => copyArt(art)}>
-          <ASCIIDisplay entry={art} size={artSize} />
+          <ASCIIDisplay entry={art} size={artSize}/>
         </div>
       </Modal>
       <Modal show={deletingArt} closeHandler={setDeletingArt}>
         <div className='col artZoomed' ref={ref}>
-          Are you sure? <br/>
+          Are you sure? <br />
           <button onClick={confirmDeleteArt}>Delete!</button>
           <button onClick={() => setDeletingArt(null)}>Never mind!</button>
         </div>
@@ -62,6 +61,9 @@ function Gallery({ entries, deleteArt }) {
   );
 }
 
-Gallery.propTypes = { entries: PropTypes.array, deleteArt: PropTypes.func };
+Gallery.propTypes = {
+  entries: PropTypes.array,
+  deleteArt: PropTypes.func
+};
 
 export default Gallery;

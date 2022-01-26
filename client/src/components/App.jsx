@@ -3,9 +3,12 @@ import SubmitForm from './SubmitForm.jsx';
 import { getAllArt, postArt, deleteArt } from '../utilities/api.js';
 import Gallery from './Gallery.jsx';
 
+export const RatioContext = React.createContext()
+
 export default function App() {
   const [gallery, setGallery] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
+  const [ratio, setRatio] = useState(1.05) //1.63?
 
   useEffect(() => {
     document.documentElement.className = darkMode ? 'dark' : '';
@@ -42,12 +45,12 @@ export default function App() {
 
   return (
     <div>
-      <div id='container' className='row'>
+      <RatioContext.Provider id='container' className='row' value={ratio}>
         <div style={{flex:1}} >
           <SubmitForm submitArt={submitArt} />
         </div>
-        <Gallery entries={gallery} deleteArt={onDeleteArt}/>
-      </div>
+        <Gallery entries={gallery} deleteArt={onDeleteArt} />
+      </RatioContext.Provider>
       <button id='darkMode' onClick={() => setDarkMode(!darkMode)} />
     </div>
   );

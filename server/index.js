@@ -28,7 +28,6 @@ app.post('/art', async (req, res) => {
 });
 
 app.delete('/art', async (req, res) => {
-  console.log('attempting to delete', req.query.art_id)
   if (!req.query.art_id) return res.status(400).send('Missing art_id!')
   try {
     await deleteArt(req.query.art_id)
