@@ -16,6 +16,11 @@ async function getAllArt() {
   return art;
 }
 
+function deleteArt(art_id) {
+  return Art.deleteOne({_id: art_id})
+    .then(response => console.log(response))
+}
+
 async function init() {
   await mongoose.connect('mongodb://localhost:27017/asciiwell');
 }
@@ -24,4 +29,5 @@ module.exports = {
   init,
   getAllArt,
   submitArt,
+  deleteArt,
 }

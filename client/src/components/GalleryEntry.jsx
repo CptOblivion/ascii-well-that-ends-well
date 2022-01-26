@@ -1,32 +1,34 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import ASCIIDisplay from './ASCIIDisplay.jsx';
+import CopyLogo from '../assets/icon-copy.svg';
 
-function GalleryEntry({ entry, size }) {
-  const [fontSize, setFontSize] = useState(10);
-  const ref = useRef();
-
-  useEffect(() => {
-    if (ref.current) {
-      setFontSize(Math.min(size / entry.ascii.length * .75, 20));
-    }
-  }, [size]);
+function GalleryEntry({ entry, size, clickHandler, copyArt, deleteArt }) {
 
   return (
     <div className='row'>
-      <button className='art col' ref={ref}>
-        <div style={{ fontSize: fontSize }}>
-          {entry.ascii.map((line, i) => (
-            <div key={i}>{line}</div>
-          ))}
-        </div>
-      </button>
       <div className='col'>
         <div>{entry.title ? entry.title : 'untitled'}</div>
         <div>{entry.user}</div>
+        <button onClick={() => copyArt(entry)} style={{width: 'fit-content', height: 'fit-content'}}>
+          <img src={CopyLogo} />
+        </button>
+        <button onClick={() => deleteArt(entry._id)} style={{fontSize: '1.5rem', width: 'fit-content', height: 'fit-content', color: 'red'}}>
+          X
+        </button>
       </div>
+      <button onClick={() => clickHandler(entry)}>
+        <ASCIIDisplay entry={entry} size={size} maxFont={20} />
+      </button>
     </div>
   );
 }
-GalleryEntry.propTypes = { entry: PropTypes.object, size: PropTypes.number };
+GalleryEntry.propTypes = {
+  entry: PropTypes.object,
+  size: PropTypes.number,
+  clickHandler: PropTypes.func,
+  copyArt: PropTypes.func,
+  deleteArt: PropTypes.func,
+};
 
 export default GalleryEntry;

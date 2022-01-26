@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SubmitForm from './SubmitForm.jsx';
-import { getAllArt, postArt } from '../utilities/api.js';
+import { getAllArt, postArt, deleteArt } from '../utilities/api.js';
 import Gallery from './Gallery.jsx';
 
 export default function App() {
@@ -13,9 +13,23 @@ export default function App() {
 
   function updateGallery() {
     getAllArt().then((newGallery) => {
-      newGallery.forEach((entry) => (entry.ascii = entry.ascii.split('\n')));
+      for (const entry of newGallery) {
+        entry.asciiWidth = 0;
+        entry.asciiLines = entry.ascii.split('\n')
+        for (const line of entry.asciiLines) {
+          entry.asciiWidth = Math.max(entry.asciiWidth, line.length)
+        }
+      }
       setGallery(newGallery);
     });
+  }
+
+  function onDeleteArt(art_id) {
+    deleteArt(art_id)
+      .then(() => {
+        updateGallery();
+      })
+      .catch(err => console.error(err))
   }
 
   useEffect(() => {
@@ -27,9 +41,14 @@ export default function App() {
   }
 
   return (
-    <div className='container'>
-      <SubmitForm submitArt={submitArt} />
-      <Gallery entries={gallery} />
+    <div>
+      <div id='container' className='row'>
+        <div style={{flex:1}} >
+          <SubmitForm submitArt={submitArt} />
+        </div>
+        <Gallery entries={gallery} deleteArt={onDeleteArt}/>
+      </div>
+      <button id='darkMode' onClick={() => setDarkMode(!darkMode)} />
     </div>
   );
 }
