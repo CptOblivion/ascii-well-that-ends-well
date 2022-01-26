@@ -32,13 +32,13 @@ Once the project moves into development, the press release can be used as a touc
   > With ASCII Well that Ends Well, when you find a great ASCII image, you can paste it into the text box and it will be saved for later, in an easy-to-browse gallery.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "We're all big fans of memes here, we love that we can make it easier to share them around!"
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Just visit the site, draw or paste in your favorite memes, and come back later when you need them!
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > ""
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
