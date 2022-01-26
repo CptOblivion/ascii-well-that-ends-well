@@ -12,6 +12,8 @@ const height = gridHeight * blockHeight;
 const line = Array(gridWidth).fill(' ').join('');
 const emptyAscii = Array(gridHeight).fill(line).join('\n');
 
+let ctx;
+
 const asciiMap = [
   ' ',
   "'", //TL dot
@@ -30,12 +32,18 @@ const asciiMap = [
   '/', //BR corner
   '#', //full
 ];
-function DrawingArea({ updateArt, blockEvents }) {
+function DrawingArea({ updateArt, canvas, rendered }) {
   const [mouseDown, setMouseDown] = useState(false);
   const [ascii, setAscii] = useState(emptyAscii);
   const [charToPix] = useState(0.63);
   const [tool, setTool] = useState('draw')
-  const ref = useRef(null);
+
+  useEffect(() => {
+    if (canvas) {
+      ctx = canvas.getContext('2d')
+    }
+  }, [canvas])
+
 
   const ratio = useContext(RatioContext);
   const canvasWidth = 800 * ratio;
@@ -46,7 +54,6 @@ function DrawingArea({ updateArt, blockEvents }) {
     const offs = e.target.getBoundingClientRect();
     const posX = (e.pageX - offs.left) * (width / offs.width);
     const posY = (e.pageY - offs.top) * (height / offs.height);
-    const ctx = ref.current.getContext('2d');
     let style, comp;
     if (tool === 'draw') {
       style = '#000000ff'
@@ -60,7 +67,7 @@ function DrawingArea({ updateArt, blockEvents }) {
     ctx.strokeStyle = style;
     ctx.globalCompositeOperation = comp
     ctx.fillRect(posX, posY, 1, 1);
-    imageGrid(ctx.getImageData(0, 0, width, height).data);
+    imageToAscii();
   }
   function drawLine(e) {
     if (mouseDown) {
@@ -69,17 +76,17 @@ function DrawingArea({ updateArt, blockEvents }) {
       const endY = e.pageY - offs.top;
       const scaleX = width / offs.width;
       const scaleY = height / offs.height;
-      const ctx = ref.current.getContext('2d');
       ctx.imageSmoothingEnabled = false;
       ctx.beginPath();
       ctx.moveTo((endX - e.movementX) * scaleX, (endY - e.movementY) * scaleY);
       ctx.lineTo(endX * scaleX, endY * scaleY);
       ctx.stroke();
-      imageGrid(ctx.getImageData(0, 0, width, height).data);
+      imageToAscii();
     }
   }
 
-  function imageGrid(pixelArray) {
+  function imageToAscii() {
+    const pixelArray = ctx.getImageData(0, 0, width, height).data;
     //the pixel array is a single line of RGBA values, that we need to break up into blocks of characters
     let newAscii = '';
     for (let i = 0; i < gridHeight; i++) {
@@ -102,6 +109,10 @@ function DrawingArea({ updateArt, blockEvents }) {
     updateArt(newAscii);
   }
 
+  useEffect(() => {
+    imageToAscii()
+  }, [rendered])
+
   return (
     <div >
       <div style={{ position: 'relative', width: 'fit-content'}} className='cleanBorder'>
@@ -114,7 +125,6 @@ function DrawingArea({ updateArt, blockEvents }) {
           onMouseOut={() => setMouseDown(false)}
           style={{ width: canvasWidth, height: canvasHeight }}
         />
-        <canvas ref={ref} id='drawingArea' hidden={true} />
         <div
           style={{
             position: 'absolute',
@@ -143,6 +153,6 @@ function DrawingArea({ updateArt, blockEvents }) {
   );
 }
 
-DrawingArea.propTypes = { updateArt: PropTypes.func };
+DrawingArea.propTypes = { updateArt: PropTypes.func, canvas: PropTypes.any, rendered: PropTypes.bool };
 
 export default DrawingArea;

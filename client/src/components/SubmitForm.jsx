@@ -12,6 +12,7 @@ function SubmitForm({ submitArt }) {
   const [drawing, setDrawing] = useState(false);
 
   const inputRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -42,8 +43,9 @@ function SubmitForm({ submitArt }) {
       data-lpignore='true'
     >
       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='title' />
+      <canvas ref={canvasRef} id='drawingArea' hidden={true} />
       {drawing ? (
-        <DrawingArea updateArt={setAscii} />
+        <DrawingArea updateArt={setAscii} canvas={canvasRef.current} rendered={drawing}/>
       ) : (
         <textarea
           style={{ height: asciiHeight }}
