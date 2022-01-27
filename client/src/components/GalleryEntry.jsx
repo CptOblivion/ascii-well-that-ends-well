@@ -17,8 +17,8 @@ function GalleryEntry({ entry, size, clickHandler, copyArt, deleteArt }) {
           X
         </button>
       </div>
-      <button onClick={() => clickHandler(entry)}>
-        <ASCIIDisplay entry={entry} size={size} maxFont={20} />
+      <button onClick={() => clickHandler(entry)} className='artFrame'>
+          <ASCIIDisplay entry={entry} size={size} maxFont={20} />
       </button>
     </div>
   );
