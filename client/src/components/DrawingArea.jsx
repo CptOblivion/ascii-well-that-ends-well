@@ -85,27 +85,29 @@ function DrawingArea({ updateArt, canvas, rendered }) {
   }
 
   function imageToAscii() {
-    const pixelArray = ctx.getImageData(0, 0, width, height).data;
-    //the pixel array is a single line of RGBA values, that we need to break up into blocks of characters
-    let newAscii = '';
-    for (let i = 0; i < gridHeight; i++) {
-      for (let j = 0; j < gridWidth; j++) {
-        const blockOffset = i * blockHeight * width + j * blockWidth;
-        let index = 0;
-        for (let bi = 0; bi < blockHeight; bi ++) {
-          for (let bj = 0; bj < blockWidth; bj++) {
-            if (pixelArray[(blockOffset + bi * width + bj) * 4 + 3] > 128) {
-              index += 1 << (bi * blockWidth + bj)
+    if (ctx) {
+      const pixelArray = ctx.getImageData(0, 0, width, height).data;
+      //the pixel array is a single line of RGBA values, that we need to break up into blocks of characters
+      let newAscii = '';
+      for (let i = 0; i < gridHeight; i++) {
+        for (let j = 0; j < gridWidth; j++) {
+          const blockOffset = i * blockHeight * width + j * blockWidth;
+          let index = 0;
+          for (let bi = 0; bi < blockHeight; bi ++) {
+            for (let bj = 0; bj < blockWidth; bj++) {
+              if (pixelArray[(blockOffset + bi * width + bj) * 4 + 3] > 128) {
+                index += 1 << (bi * blockWidth + bj)
+              }
             }
           }
+          newAscii += asciiMap[index]
+          //end of the line
+          if (j === gridWidth - 1) newAscii += '\n';
         }
-        newAscii += asciiMap[index]
-        //end of the line
-        if (j === gridWidth - 1) newAscii += '\n';
       }
+      setAscii(newAscii);
+      updateArt(newAscii);
     }
-    setAscii(newAscii);
-    updateArt(newAscii);
   }
 
   useEffect(() => {
