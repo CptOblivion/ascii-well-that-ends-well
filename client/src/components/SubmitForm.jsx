@@ -9,7 +9,7 @@ function SubmitForm({ submitArt, toast }) {
   const [ascii, setAscii] = useState('');
   const [invalid, setInvalid] = useState(false);
   const [asciiHeight, setAsciiHeight] = useState(0);
-  const [drawing, setDrawing] = useState(false);
+  const [drawing, setDrawing] = useState(true);
 
   const inputRef = useRef(null);
   const canvasRef = useRef(null);
