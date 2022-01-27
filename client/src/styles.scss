@@ -87,12 +87,21 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   align-items: flex-end;
-  .art {
-    margin: 0.1rem;
-    justify-content: center;
-    align-items: center;
-    height: 8rem;
+  .artFrame {
     width: 8rem;
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .art {
+    width: fit-content;
+    height: fit-content;
+    margin: 0.1rem;
+    align-items: flex-start;
+    max-height: 8rem;
+    max-width: 8rem;
     div {
       font-weight: bold;
     }
